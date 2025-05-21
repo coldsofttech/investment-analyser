@@ -2,7 +2,7 @@ let auth0Client = null;
 
 const auth0Config = {
     domain: "__AUTH0_DOMAIN__",
-    client_id: "__AUTH0_CLIENT_ID__",
+    clientId: "__AUTH0_CLIENT_ID__",
     redirect_uri: window.location.origin + "/menu.html"
 };
 
