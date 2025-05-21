@@ -14,10 +14,11 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v3
 
-      - name: Replace Auth0 placeholders in auth0.template.js
+      - name: Replace Auth0 placeholders
         run: |
-          # Replace placeholders and output to the correct path
-          sed "s/__AUTH0_DOMAIN__/${{ secrets.AUTH0_DOMAIN }}/g; s/__AUTH0_CLIENT_ID__/${{ secrets.AUTH0_CLIENT_ID }}/g" docs/static/js/auth0.template.js > docs/static/js/auth0.js
+          echo "Replacing placeholders..."
+          sed "s|__AUTH0_DOMAIN__|${{ secrets.AUTH0_DOMAIN }}|g; s|__AUTH0_CLIENT_ID__|${{ secrets.AUTH0_CLIENT_ID }}|g" docs/static/js/auth0.template.js > docs/static/js/auth0.js
+          ls -l docs/static/js
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
