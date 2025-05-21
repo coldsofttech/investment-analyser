@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Investment Analyser</title>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="static/css/styles.css" />
+    </head>
+    <body>
+        <div class="container">
+            <div class="position: relative;">
+                <h1 class="title">Investment Analyser</h1>
+                <div class="button-container">
+                    <button id="logout" class="btn btn-custom-blue">Logout</button>
+                </div>
+            </div>
+
+            <div class="row col-md-12" id="user-info" style="text-align: right;"></div>
+
+            <div id="errorMessage" class="text-danger"></div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-12 padding">
+                    <div class="description-box">
+                        <h4>About the App</h4>
+                        <p>
+                            <strong>Investment Analyser</strong> is your personal assistant for evaluating and comparing investment 
+                            opportunities. Whether you're a beginner or a seasoned investor, this tool helps you make informed 
+                            decisions based on real data.
+                        </p>
+                        <p>
+                            Currently, the app supports:
+                            <ul>
+                                <li><strong>Stock Analysis</strong>: View historical performance, growth metrics, and recommendations.</li>
+                                <li><strong>Pie/Portfolio Analysis</strong>: Evaluate the performance and risk of custom investment portfolios.</li>
+                            </ul>
+                            Stay tuned for future enhancements!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+        <script src="static/js/auth0.js"></script>
+        <script>
+            $(function() {
+                window.onload = async() => {
+                    await initAuth0();
+                    await handleRedirectCallbackIfPresent();
+                    await requireAuth();
+                    const user = await getUserInfo();
+                    $('#user-info').text(`Logged in as ${user.email}`);
+                    $('#logout').on('click', logout);
+                } 
+            });
+        </script>
+    </body>
+</html>
