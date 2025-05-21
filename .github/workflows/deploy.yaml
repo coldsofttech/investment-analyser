@@ -20,6 +20,9 @@ jobs:
           sed "s|__AUTH0_DOMAIN__|${{ secrets.AUTH0_DOMAIN }}|g; s|__AUTH0_CLIENT_ID__|${{ secrets.AUTH0_CLIENT_ID }}|g" docs/static/js/auth0.template.js > docs/static/js/auth0.js
           ls -l docs/static/js
 
+      - name: Create .nojekyll to bypass Jekyll processing
+        run: touch docs/.nojekyll
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
