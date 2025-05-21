@@ -46,16 +46,16 @@
         <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
         <script src="static/js/auth0.js"></script>
         <script>
-            $(function() {
+            $(async function () {
                 const urlParams = new URLSearchParams(window.location.search);
                 if (urlParams.has("error")) {
                     $('#errorMessage').text(decodeURIComponent(urlParams.get("error")));
                 }
 
-                window.onload = async() => {
-                    await initAuth0();
-                    $('#login').on('click', login);
-                };
+                await initAuth0();
+                $('#login').on('click', function () {
+                    login();
+                });
             });
         </script>
     </body>
