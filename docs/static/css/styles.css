@@ -387,14 +387,14 @@ input:checked + .slider:before {
 }
 
 .login {
-    display: inline-block;
+    /* display: inline-block; */
     padding: 12px 24px;
     font-size: 1.1rem;
     color: white;
     background: linear-gradient(135deg, var(--primary), var(--primary-dark));
     border: none;
     border-radius: 8px;
-    text-decoration: none;
+    /* text-decoration: none; */
     transition: background 0.3s ease, transform 0.2s ease;
     font-weight: bold;
 }
@@ -405,7 +405,7 @@ input:checked + .slider:before {
     color: white;
 }
 
-#loginButtonContainer {
+.button-container {
     position: absolute; 
     right: 7%;
     top: 8%;
