@@ -8,7 +8,7 @@ const auth0Config = {
 };
 
 async function initAuth0() {
-    auth0Client = await createAuth0Client(auth0Config);
+    auth0Client = await auth0.createAuth0Client(auth0Config);
 }
 
 async function login() {
