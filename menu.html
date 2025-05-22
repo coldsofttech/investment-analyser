@@ -59,7 +59,7 @@
                 const isAuthenticated = await isAuth0Authenticated();
                 if (isAuthenticated) {
                     const user = await getAuth0UserInfo();
-                    $('#user-info').text(`Logged in as <strong>${user.name}</strong>`);
+                    $('#user-info').html(`Logged in as: <strong>${user.name}</strong>`);
                     $('#logout').on('click', function () {
                         logoutAuth0();
                     });
