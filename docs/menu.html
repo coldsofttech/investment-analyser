@@ -48,21 +48,19 @@
         <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
         <script src="static/js/auth0.js"></script>
         <script>
-            $(function() {
-                window.onload = async() => {
-                    await configureAuth0Client();
-                    await handleAuth0RedirectCallback();
-                    await requireAuth();
-                    const isAuthenticated = await isAuth0Authenticated();
-                    if (isAuthenticated) {
-                        const user = await getAuth0UserInfo();
-                        console.log(user);
-                        $('#user-info').text(`Logged in as ${user.email}`);
-                        $('#logout').on('click', function () {
-                            logoutAuth0();
-                        });
-                    }
-                } 
+            $(async function() {
+                await configureAuth0Client();
+                await handleAuth0RedirectCallback();
+                await requireAuth();
+                const isAuthenticated = await isAuth0Authenticated();
+                if (isAuthenticated) {
+                    const user = await getAuth0UserInfo();
+                    console.log(user);
+                    $('#user-info').text(`Logged in as ${user.email}`);
+                    $('#logout').on('click', function () {
+                        logoutAuth0();
+                    });
+                }
             });
         </script>
     </body>
