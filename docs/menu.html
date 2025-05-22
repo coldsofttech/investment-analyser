@@ -50,12 +50,16 @@
         <script>
             $(function() {
                 window.onload = async() => {
-                    await initAuth0();
-                    await handleRedirectCallbackIfPresent();
+                    await configureAuth0Client();
+                    await handleAuth0RedirectCallback();
                     await requireAuth();
-                    const user = await getUserInfo();
-                    $('#user-info').text(`Logged in as ${user.email}`);
-                    $('#logout').on('click', logout);
+                    if (isAuth0Authenticated) {
+                        const user = await getAuth0UserInfo();
+                        $('#user-info').text(`Logged in as ${user.email}`);
+                        $('#logout').on('click', function () {
+                            logoutAuth0();
+                        });
+                    }
                 } 
             });
         </script>
