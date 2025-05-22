@@ -52,7 +52,7 @@
                     $('#errorMessage').text(decodeURIComponent(urlParams.get("error")));
                 }
 
-                await initAuth0();
+                await configureAuth0Client();
                 $('#login').on('click', function () {
                     login();
                 });
