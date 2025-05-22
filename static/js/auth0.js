@@ -12,7 +12,7 @@ const configureAuth0Client = async() => {
 
 const isAuth0Authenticated = async() => {
     await auth0Client.isAuthenticated();
-}
+};
 
 const updateAuth0UI = async() => {
     const isAuthenticated = await auth0Client.isAuthenticated();
