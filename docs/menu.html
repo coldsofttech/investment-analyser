@@ -55,6 +55,7 @@
                     await requireAuth();
                     if (isAuth0Authenticated) {
                         const user = await getAuth0UserInfo();
+                        console.log(user);
                         $('#user-info').text(`Logged in as ${user.email}`);
                         $('#logout').on('click', function () {
                             logoutAuth0();

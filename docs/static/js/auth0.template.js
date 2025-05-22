@@ -38,8 +38,8 @@ const handleAuth0RedirectCallback = async() => {
     const query = window.location.search;
     if (query.includes("code=") && query.includes("state=")) {
         await auth0Client.handleRedirectCallback();
-        window.history.replaceState({}, document.title, "/investment-analyser/menu.html");
         updateAuth0UI();
+        window.history.replaceState({}, document.title, "/investment-analyser/menu.html");
     }
 };
 
@@ -52,5 +52,5 @@ const requireAuth = async() => {
 };
 
 const getAuth0UserInfo = async() => {
-    return await auth0Client.getUser();
+    return JSON.stringify(await auth0Client.getUser());
 };
