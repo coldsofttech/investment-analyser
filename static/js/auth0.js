@@ -3,7 +3,7 @@ let auth0Client = null;
 const auth0Config = {
     domain: "coldsofttech.uk.auth0.com",
     clientId: "ftVRPjwMbmDUAxI8hyy0qMAakFF3FkpP",
-    redirect_uri: window.location.origin + "/menu.html"
+    redirectUri: window.location.origin + "/menu.html"
 };
 
 console.log(auth0Config);
