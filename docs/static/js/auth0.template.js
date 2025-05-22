@@ -6,6 +6,8 @@ const auth0Config = {
     redirect_uri: window.location.origin + "/menu.html"
 };
 
+console.log(auth0Config);
+
 async function initAuth0() {
     auth0Client = await auth0.createAuth0Client(auth0Config);
 }
