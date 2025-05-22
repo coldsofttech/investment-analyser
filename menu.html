@@ -53,7 +53,8 @@
                     await configureAuth0Client();
                     await handleAuth0RedirectCallback();
                     await requireAuth();
-                    if (isAuth0Authenticated) {
+                    const isAuthenticated = await isAuth0Authenticated();
+                    if (isAuthenticated) {
                         const user = await getAuth0UserInfo();
                         console.log(user);
                         $('#user-info').text(`Logged in as ${user.email}`);
