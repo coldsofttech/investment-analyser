@@ -3,7 +3,7 @@ let auth0Client = null;
 const auth0Config = {
     domain: "__AUTH0_DOMAIN__",
     clientId: "__AUTH0_CLIENT_ID__",
-    redirectUri: window.location.origin + "/menu.html"
+    redirectUri: window.location.origin + "/investment-analyser/menu.html"
 };
 
 console.log(auth0Config);
@@ -23,7 +23,7 @@ async function login() {
 
 async function logout() {
     auth0Client.logout({
-        returnTo: window.location.origin + "/index.html"
+        returnTo: window.location.origin + "/investment-analyser/index.html"
     });
 }
 
