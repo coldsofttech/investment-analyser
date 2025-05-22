@@ -9,5 +9,7 @@ const configureAuth0Client = async() => {
 
 const updateAuth0UI = async() => {
     const isAuthenticated = await auth0Client.isAuthenticated();
-    window.location.href = `/menu.html`;
+    if (isAuthenticated) {
+        window.location.href = '/investment-analyser/menu.html';
+    }
 };
