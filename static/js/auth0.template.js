@@ -6,3 +6,8 @@ const configureAuth0Client = async() => {
         clientId: "__AUTH0_CLIENT_ID__"
     });
 };
+
+const updateAuth0UI = async() => {
+    const isAuthenticated = await auth0Client.isAuthenticated();
+    window.location.href = `/menu.html`;
+};

@@ -53,6 +53,7 @@
                 }
 
                 await configureAuth0Client();
+                updateAuth0UI();
                 $('#login').on('click', function () {
                     login();
                 });
