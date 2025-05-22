@@ -55,5 +55,5 @@ const requireAuth = async() => {
 };
 
 const getAuth0UserInfo = async() => {
-    return JSON.stringify(await auth0Client.getUser());
+    return await auth0Client.getUser();
 };
