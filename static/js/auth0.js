@@ -1,9 +1,12 @@
 let auth0Client = null;
 
 const configureAuth0Client = async() => {
+    if (auth0Client) return;
     auth0Client = await auth0.createAuth0Client({
         domain: "coldsofttech.uk.auth0.com",
-        clientId: "ftVRPjwMbmDUAxI8hyy0qMAakFF3FkpP"
+        clientId: "ftVRPjwMbmDUAxI8hyy0qMAakFF3FkpP",
+        cacheLocation: "localStorage",
+        useRefreshTokens: true
     });
 };
 
