@@ -16,7 +16,11 @@
                 </div>
             </div>
 
-            <div class="row col-md-12" id="user-info" style="text-align: right;"></div>
+            <div class="row" id="user-info">
+                <div class="col-md-12" style="text-align: right;">
+                    User:
+                </div>
+            </div>
 
             <div id="errorMessage" class="text-danger"></div>
 
@@ -55,8 +59,7 @@
                 const isAuthenticated = await isAuth0Authenticated();
                 if (isAuthenticated) {
                     const user = await getAuth0UserInfo();
-                    console.log(user);
-                    $('#user-info').text(`Logged in as ${user.email}`);
+                    $('#user-info').text(`Logged in as <strong>${user.name}</strong>`);
                     $('#logout').on('click', function () {
                         logoutAuth0();
                     });
