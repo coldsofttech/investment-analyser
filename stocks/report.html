@@ -192,12 +192,34 @@
         <script src="../static/js/utils.js"></script>
         <script src="../static/js/auth0.js"></script>
         <script src="../static/js/currency.js"></script>
+        <script src="../static/js/exchange.js"></script>
         <script>
             $(async function() {
                 loadError();
                 verifyAuth0Authentication();
                 initLogoutButton();
             });
+
+            async function initPage() {
+                let defaultCurrency, exchanges, stockData, fxRate, fxRateKey, stockObject;
+
+                const $loadingOverlay = $('#loading-overlay');
+                const urlParams = new URLSearchParams(window.location.search);
+                const errorRedirectionUrl = `/investment-analyser/stocks/input.html?${decodeURIComponent(urlParams.toString())}`;
+                const ticker = urlParams.get('ticker');
+                const stocksOwned = parseFloat(urlParams.get('stocksOwned')) || null;
+                const avgPrice = parseFloat(urlParams.get('avgPrice')) || null;
+
+                if (!ticker) return displayError('Missing Stock Ticker.', true, errorRedirectionUrl);
+                if (!defaultCurrency) {
+                    defaultCurrency = $.Currency.getDefaultCurrency();
+                }
+                if (!defaultCurrency) return displayError('Unable to retrieve the default currency.', true, errorRedirectionUrl);
+                if (!exchanges) {
+                    exchanges = $.Exchange.getExchanges();
+                }
+                if (!exchanges) console.warn('Unable to retrieve the exchanges mapping.');
+            }
         </script>
     </body>
 </html>
