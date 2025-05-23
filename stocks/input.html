@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Investment Analyser - Stocks</title>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../static/css/styles.css" />
+    </head>
+    <body>
+        <div id="loading-overlay"><div class="message">Loading...</div></div>
+
+        <div class="container">
+            <div class="position: relative;">
+                <h1 class="title">Stocks Analyser</h1>
+                <div class="button-container">
+                    <button id="logout" class="btn btn-custom-blue">Logout</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12" style="text-align: right;">
+                    <span id="user-info"></span>
+                </div>
+            </div>
+
+            <nav aria-label="breadcrumb" class="custom-breadcrumb mt-3 mb-4">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/investment-analyser/menu.html">Investment Analyser</a></li>
+                    <li class="breadcrumb-separator">&#8594;</li>
+                    <li class="breadcrumb-item"><a href="/investment-analyser/stocks">Stocks Analyser</a></li>
+                    <li class="breadcrumb-separator">&#8594;</li>
+                    <li class="breadcrumb-item active" aria-current="page">Input</li>
+                </ol>
+            </nav>
+
+            <div class="row" style="visibility: unset;">
+                <div class="col-md-12" id="errorMessageContainer">
+                    <div class="alert alert-danger" role="alert" id="errorMessage"></div>
+                </div>
+            </div>
+
+            <div class="plotly-chart" style="height: 300px;">
+                <div class="row padding">
+                    <div class="col-md-8">
+                        <strong>Enter Stock details to analyse:</strong>
+                    </div>
+                </div>
+
+                <form id="form" action="/investment-analyser/stocks/report.html" method="post">
+                    <div class="row padding">
+                        <div class="col-md-4">
+                            <label for="ticker">Ticker</label>
+                            <i class="optional-text">(Symbol, like NVDA for Nvidia)</i>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" name="ticker" id="ticker" value="{{ ticker|default:'' }}" required>
+                        </div>
+                    </div>
+
+                    <div class="row padding">
+                        <div class="col-md-4">
+                            <label for="stocksOwned">Stocks Owned</label>
+                            <i class="optional-text">(Optional, number of stocks owned)</i>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="number" class="form-control" name="stocksOwned" id="stocksOwned" value="{{ stocksOwned|default:'' }}" step="any">
+                        </div>
+                    </div>
+
+                    <div class="row padding">
+                        <div class="col-md-4">
+                            <label for="avgPrice">Average Price</label>
+                            <i class="optional-text">(Required if Stocks Owned is provided, in <span id="defaultCurrency"></span>)</i>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="number" class="form-control" name="avgPrice" id="avgPrice" value="{{ avgPrice|default:'' }}" step="any">
+                        </div>
+                    </div>
+
+                    <div class="row padding">
+                        <div class="col-md-12 text-right">
+                            <button type="submit" id="submit" class="btn btn-custom-blue" style="width: 100px;">Analyse</button>
+                            <button type="reset" id="reset" class="btn btn-custom-blue" style="width: 100px;">Reset</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+        <script src="../static/js/utils.js"></script>
+        <script src="../static/js/auth0.js"></script>
+        <script src="../static/js/currency.js"></script>
+        <script>
+            $(async function() {
+                loadError();
+                verifyAuth0Authentication();
+                initLogoutButton();
+                await initPage();
+            });
+
+            async function initPage() {
+                let defaultCurrency;
+
+                const $loadingOverlay = $('#loading-overlay');
+                const $defaultCurrency = $('#defaultCurrency');
+                const $submitButton = $('#submit');
+                const errorText = $('#errorMessage').text();
+
+                if (!errorText) {
+                    if (!defaultCurrency) {
+                        $loadingOverlay.show();
+                        defaultCurrency = $.Currency.getDefaultCurrency();
+                        $defaultCurrency.text(defaultCurrency.currency);
+                    } else {
+                        $defaultCurrency.text(defaultCurrency.currency);
+                    }
+                } else {
+                    $defaultCurrency.text(defaultCurrency?.currency || '');
+                }
+
+                $loadingOverlay.hide();
+
+                initSubmitButton($submitButton, errorText);
+            }
+
+            async function initSubmitButton($button, errorText) {
+                const buttonContent = errorText ? "Retry" : "Analyse";
+                $button.text(buttonContent);
+
+                $button.on('click', function() {
+                    localStorage.removeItem('lastError');
+                    $('#form').submit();
+                });
+            }
+        </script>
+    </body>
+</html>
