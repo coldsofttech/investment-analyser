@@ -1,8 +1,20 @@
 function loadError() {
     const urlParams = new URLSearchParams(window.location.search);
-    const msg = decodeURIComponent(urlParams.get('error')) || localStorage.getItem('lastError');
+    const msg = urlParams.get('error');
 
-    if (msg && msg !== null && msg !== undefined) return displayError(msg);
+    if (msg && msg !== null && msg !== undefined) {
+        return displayError(decodeURIComponent(msg));
+    } else {
+        return removeError();
+    }
+}
+
+function removeError({
+    errorContainer = '#errorMessageContainer',
+    errorElementId = '#errorMessage'
+} = {}) {
+    $(errorElementId).hide();
+    $(errorContainer).html();
 }
 
 function displayError(message, {
