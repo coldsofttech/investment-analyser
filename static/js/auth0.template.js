@@ -54,7 +54,7 @@ const handleAuth0RedirectCallback = async() => {
 const requireAuth = async() => {
     const isAuthenticated = await auth0Client.isAuthenticated();
     if (!isAuthenticated) {
-        const msg = encodeURIComponent("Not authenticated.");
+        const msg = encodeURIComponent("Unable to authenticate. Please contact the administrator.");
         window.location.href = `/investment-analyser/index.html?error=${msg}`;
     }
 };

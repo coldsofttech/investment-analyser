@@ -22,7 +22,11 @@
                 </div>
             </div>
 
-            <div id="errorMessage" class="text-danger"></div>
+            <div class="row" style="visibility: unset;">
+                <div class="col-md-12" id="errorMessageContainer">
+                    <div class="alert alert-danger" role="alert" id="errorMessage"></div>
+                </div>
+            </div>
 
             <div class="row justify-content-center">
                 <div class="col-md-12 padding">
@@ -53,6 +57,12 @@
         <script src="static/js/auth0.js"></script>
         <script>
             $(async function() {
+                loadError();
+                initAuth0();
+                initLogoutButton();
+            });
+
+            async function initAuth0() {
                 await configureAuth0Client();
                 await handleAuth0RedirectCallback();
                 await requireAuth();
@@ -60,11 +70,14 @@
                 if (isAuthenticated) {
                     const user = await getAuth0UserInfo();
                     $('#user-info').html(`Hello, <strong>${user.name}</strong>!`);
-                    $('#logout').on('click', function () {
-                        logoutAuth0();
-                    });
                 }
-            });
+            }
+
+            async function initLogoutButton() {
+                $('#logout').on('click', function () {
+                    logoutAuth0();
+                });
+            }
         </script>
     </body>
 </html>
