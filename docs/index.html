@@ -16,7 +16,11 @@
                 </div>
             </div>
 
-            <div id="errorMessage" class="text-danger"></div>
+            <div class="row" style="visibility: unset;">
+                <div class="col-md-12" id="errorMessageContainer">
+                    <div class="alert alert-danger" role="alert" id="errorMessage"></div>
+                </div>
+            </div>
 
             <div class="row justify-content-center">
                 <div class="col-md-12 padding">
@@ -47,17 +51,21 @@
         <script src="static/js/auth0.js"></script>
         <script>
             $(async function () {
-                const urlParams = new URLSearchParams(window.location.search);
-                if (urlParams.has("error")) {
-                    $('#errorMessage').text(decodeURIComponent(urlParams.get("error")));
-                }
+                loadError();
+                initAuth0();
+                initLoginButton();
+            });
 
+            async function initAuth0() {
                 await configureAuth0Client();
                 updateAuth0UI();
+            }
+
+            async function initLoginButton() {
                 $('#login').on('click', function () {
                     loginAuth0();
                 });
-            });
+            }
         </script>
     </body>
 </html>
