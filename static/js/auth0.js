@@ -62,3 +62,26 @@ const requireAuth = async() => {
 const getAuth0UserInfo = async() => {
     return await auth0Client.getUser();
 };
+
+const verifyAuth0Authentication = async() => {
+    await configureAuth0Client();
+    await handleAuth0RedirectCallback();
+    await requireAuth();
+    const isAuthenticated = await isAuth0Authenticated();
+    if (isAuthenticated) {
+        const user = await getAuth0UserInfo();
+        $('#user-info').html(`Hello, <strong>${user.name}</strong>!`);
+    }
+}
+
+async function initLoginButton() {
+    $('#login').on('click', function () {
+        loginAuth0();
+    });
+}
+
+async function initLogoutButton() {
+    $('#logout').on('click', function () {
+        logoutAuth0();
+    });
+}
