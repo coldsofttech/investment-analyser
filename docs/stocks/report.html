@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Investment Analyser - Stocks</title>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="../static/css/styles.css" />
+        <style>
+            #historyTable th.text-right {
+                text-align: right !important;
+            }
+
+            #forecastTable th.text-right {
+                text-align: right !important;
+            }
+
+            #dividendsTable th.text-right {
+                text-align: right !important;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="loading-overlay">
+            <div class="message">
+                Your awesome "Stock Analysis" report is loading. Hang tight!
+                If it takes too long, just refresh the page...
+            </div>
+        </div>
+
+        <button id="scrollToTop" class="btn btn-custom-blue rounded-circle shadow">↑</button>
+
+        <div class="container">
+            <div class="position: relative;">
+                <h1 class="title">
+                    <img id="logo" class="logo" />
+                    <span id="companyName"></span>
+                </h1>
+                <div class="recommendation-box hold" id="riskProfileContainer">
+                    <strong>Risk:</strong> <span id="riskProfile"></span>
+                </div>
+                <div class="button-container">
+                    <button id="logout" class="btn btn-custom-blue">Logout</button>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12" style="text-align: right;">
+                    <span id="user-info"></span>
+                </div>
+            </div>
+
+            <nav aria-label="breadcrumb" class="custom-breadcrumb mt-3 mb-4">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/investment-analyser/menu.html">Investment Analyser</a></li>
+                    <li class="breadcrumb-separator">&#8594;</li>
+                    <li class="breadcrumb-item"><a href="/investment-analyser/stocks">Stocks Analyser</a></li>
+                    <li class="breadcrumb-separator">&#8594;</li>
+                    <li class="breadcrumb-item"><a href="/investment-analyser/stocks/input.html">Input</a></li>
+                    <li class="breadcrumb-separator">&#8594;</li>
+                    <li class="breadcrumb-item active" aria-current="page">Report</li>
+                </ol>
+            </nav>
+
+            <div class="row" style="visibility: unset;">
+                <div class="col-md-12" id="errorMessageContainer">
+                    <div class="alert alert-danger" role="alert" id="errorMessage"></div>
+                </div>
+            </div>
+
+            <div class="row custom-breadcrumb padding" id="investmentContainer">
+                <div class="col-md-4 investment-row">
+                    <strong>Net Deposit:</strong> <span id="investmentNet" style="font-weight: bold;"></span>
+                </div>
+                <div class="col-md-4 investment-row">
+                    <strong>Current Value:</strong> <span id="investmentCurrent" style="font-weight: bold;"></span>
+                </div>
+                <div class="col-md-4 investment-row">
+                    <strong>Rate of Return %:</strong> <span id="investmentGrowth" style="font-weight: bold;"></span>
+                </div>
+            </div>
+
+            <div class="row" style="padding-bottom: 10px; padding-top: 10px; display: flex; align-items: stretch;">
+                <div class="col-md-6 d-flex">
+                    <div class="recommendation-box hold" id="shortTermRecommendationContainer" style="flex: 1;">
+                        <strong>Short-Term:</strong> <span id="shortTermRecommendation"></span>
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex">
+                    <div class="recommendation-box hold" id="longTermRecommendationContainer" style="flex: 1;">
+                        <strong>Long-Term:</strong> <span id="longTermRecommendation"></span>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="title">Company Information</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <ul class="details-list">
+                        <li><strong>Exchange:</strong> <span id="exchange"></span></li>
+                        <li><strong>Industry:</strong> <span id="industry"></span></li>
+                        <li><strong>Sector:</strong> <span id="sector"></span></li>
+                        <li><strong>Website:</strong> <a target="_blank" id="website"></a></li>
+                        <li><strong>Stocks Owned:</strong> <span id="stocksOwned"></span></li>
+                        <li><strong>Avg. Price:</strong> <span id="avgPrice"></span></li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <ul class="details-list">
+                        <li><strong>Market Cap:</strong> <span id="marketCap"></span></li>
+                        <li><strong>Dividend Yield:</strong> <span id="dividendYield"></span></li>
+                        <li><strong>Dividend Payout Ratio:</strong> <span id="dividendPayoutRatio"></span></li>
+                        <li><strong>Dividend Frequency:</strong> <span id="dividendFrequency"></span></li>
+                        <li><strong>Volatility:</strong> <span id="volatility"></span></li>
+                        <li><strong>Beta:</strong> <span id="beta"></span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2 class="title">Historical Performance</h2>
+            <table id="historyTable" class="display dataTable">
+                <thead>
+                    <tr>
+                        <th>Index</th>
+                        <th>Period</th>
+                        <th class="text-right">Growth %</th>
+                        <th class="text-right">CAGR %</th>
+                        <th class="text-right">Dividend CAGR %</th>
+                        <th class="text-right">Total Return CAGR %</th>
+                    </tr>
+                </thead>
+            </table>
+
+            <div class="plotly-chart">
+                <div id="stockInfoChart" style="display: flex; justify-content: center; align-items: center; height: 100%; text-align: center;"></div>
+            </div>
+
+            <h2 class="title">Future Performance</h2>
+            <table id="forecastTable" class="display dataTable">
+                <thead>
+                    <tr>
+                        <th>Index</th>
+                        <th>Period</th>
+                        <th class="text-right">Forecast Price</th>
+                        <th class="text-right">Growth %</th>
+                        <th class="text-right">CAGR %</th>
+                        <th class="text-right">Dividend CAGR %</th>
+                        <th class="text-right">Total Returns CAGR %</th>
+                        <th class="text-right">Price Return %</th>
+                        <th class="text-right">Total Returns</th>
+                    </tr>
+                </thead>
+            </table>
+
+            <h2 class="title">Dividends</h2>
+            <table id="dividendsTable" class="display dataTable">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th class="text-right">Amount <i>(per share)</i></th>
+                        <th class="text-right">Earnings</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+        <footer class="footer mt-5 pt-4 pb-4">
+            <div class="container">
+                <h5 class="mb-3">Key Terminology</h5>
+                <ul class="list-unstyled">
+                    <li><strong>Period:</strong> The historical or forecasted time frame over which performance is being measured (e.g., 1 month, 1 year, 10 years).</li>
+                    <li><strong>Total Growth %:</strong> The cumulative percentage increase in the stock price over the given period. It shows the overall growth but not annualised.</li>
+                    <li><strong>CAGR %:</strong> <strong>Compound Annual Growth Rate</strong> of the stock's price over the period. It represents the average yearly growth rate assuming compounding.</li>
+                    <li><strong>Dividend CAGR %:</strong> The CAGR of dividends over the same period. It reflects how fast dividends have grown annually with reinvestment.</li>
+                    <li><strong>Total Return CAGR %:</strong> CAGR including both price appreciation and dividends. It reflects the compounded annual rate of return for a reinvesting investor.</li>
+                    <li><strong>Forecast Price:</strong> The projected stock price at the end of the forecast period.</li>
+                    <li><strong>Price Return %:</strong> The return percentage based on stock price appreciation only.</li>
+                    <li><strong>Total Returns:</strong> Your expected return based on your holdings and total return percent.</li>
+                </ul>
+                <p id="conversionRateFooter"></p>
+                <p class="text-muted mt-4">This report is generated using the <strong>Investment Analyser</strong>.</p>
+            </div>
+        </footer>
+
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="https://cdn.auth0.com/js/auth0-spa-js/2.0/auth0-spa-js.production.js"></script>
+        <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+        <script src="https://cdn.plot.ly/plotly-3.0.1.min.js" charset="utf-8"></script>
+        <script src="../static/js/utils.js"></script>
+        <script src="../static/js/auth0.js"></script>
+        <script src="../static/js/currency.js"></script>
+        <script>
+            $(async function() {
+                loadError();
+                verifyAuth0Authentication();
+                initLogoutButton();
+            });
+        </script>
+    </body>
+</html>
