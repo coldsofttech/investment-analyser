@@ -2,7 +2,7 @@ function loadError() {
     const urlParams = new URLSearchParams(window.location.search);
     const msg = decodeURIComponent(urlParams.get('error')) || localStorage.getItem('lastError');
 
-    if (msg) return displayError(msg);
+    if (msg && msg !== null && msg !== undefined) return displayError(msg);
 }
 
 function displayError(message, {
