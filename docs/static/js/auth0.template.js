@@ -40,9 +40,14 @@ const logoutAuth0 = async() => {
 const handleAuth0RedirectCallback = async() => {
     const query = window.location.search;
     if (query.includes("code=") && query.includes("state=")) {
-        await auth0Client.handleRedirectCallback();
-        updateAuth0UI();
-        window.history.replaceState({}, document.title, "/investment-analyser/menu.html");
+        try {
+            await auth0Client.handleRedirectCallback();
+            updateAuth0UI();
+            window.history.replaceState({}, document.title, "/investment-analyser/menu.html");
+        } catch (err) {
+            const msg = encodeURIComponent(err.error_description || err.message || "Unknown login error.");
+            window.location.href = `/investment-analyser/index.html?error=${msg}`;
+        }
     }
 };
 
