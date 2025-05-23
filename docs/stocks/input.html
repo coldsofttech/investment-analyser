@@ -54,7 +54,7 @@
                             <i class="optional-text">(Symbol, like NVDA for Nvidia)</i>
                         </div>
                         <div class="col-md-8">
-                            <input type="text" class="form-control" name="ticker" id="ticker" value="{{ ticker|default:'' }}" required>
+                            <input type="text" class="form-control" name="ticker" id="ticker" required>
                         </div>
                     </div>
 
@@ -64,7 +64,7 @@
                             <i class="optional-text">(Optional, number of stocks owned)</i>
                         </div>
                         <div class="col-md-8">
-                            <input type="number" class="form-control" name="stocksOwned" id="stocksOwned" value="{{ stocksOwned|default:'' }}" step="any">
+                            <input type="number" class="form-control" name="stocksOwned" id="stocksOwned" step="any">
                         </div>
                     </div>
 
@@ -74,7 +74,7 @@
                             <i class="optional-text">(Required if Stocks Owned is provided, in <span id="defaultCurrency"></span>)</i>
                         </div>
                         <div class="col-md-8">
-                            <input type="number" class="form-control" name="avgPrice" id="avgPrice" value="{{ avgPrice|default:'' }}" step="any">
+                            <input type="number" class="form-control" name="avgPrice" id="avgPrice" step="any">
                         </div>
                     </div>
 
