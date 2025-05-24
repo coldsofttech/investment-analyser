@@ -70,18 +70,20 @@ const verifyAuth0Authentication = async() => {
     const isAuthenticated = await isAuth0Authenticated();
     if (isAuthenticated) {
         const user = await getAuth0UserInfo();
-        $('#user-info').html(`Hello, <strong>${user.name}</strong>!`);
+        $('#user-info').text(user.name);
     }
 }
 
 async function initLoginButton() {
-    $('#login').on('click', function () {
+    $('#login').on('click', function (e) {
+        e.preventDefault();
         loginAuth0();
     });
 }
 
 async function initLogoutButton() {
-    $('#logout').on('click', function () {
+    $('#logout').on('click', function (e) {
+        e.preventDefault();
         logoutAuth0();
     });
 }
