@@ -51,3 +51,70 @@ function displayError(message, {
         }
     }
 }
+
+(function($) {
+    $.Breadcrumb = {
+        items: [],
+        container: '#breadcrumb',
+        isMobileView: window.innerWidth < 768,
+
+        loadBreadcrumb: function(items, container = '#breadcrumb') {
+            this.items = items;
+            this.container = container;
+
+            const $breadcrumb = $(container);
+            const isMobile = window.innerWidth < 768;
+
+            $breadcrumb.empty();
+            if (isMobile && items.length > 1) {
+                const prevItem = items[items.length - 2];
+                $breadcrumb.html(`
+                    <li class="breadcrumb-separator mobile">&#x2039;</li>
+                    <li class="breadcrumb-item">
+                        <a href="${prevItem.url}">${prevItem.label}</a>
+                    </li>
+                `);
+            } else {
+                let content = '';
+                items.forEach((item, idx) => {
+                    if (idx > 0) {
+                        content += `<li class="breadcrumb-separator">&#8594;</li>`;
+                    }
+
+                    if (item.url && idx < items.length - 1) {
+                        content += `
+                            <li class="breadcrumb-item">
+                                <a href="${item.url}">${item.label}</a>
+                            </li>
+                        `;
+                    } else {
+                        content += `
+                            <li class="breadcrumb-item active" aria-current="page">${item.label}</li>
+                        `;
+                    }
+                });
+
+                $breadcrumb.html(content);
+            }
+
+            this.isMobileView = isMobile;
+        },
+
+        handleResize: function() {
+            const currentMobile = window.innerWidth < 768;
+            if (currentMobile !== this.isMobileView) {
+                this.loadBreadcrumb(this.items, this.container);
+            }
+        },
+
+        initResizeListener: function() {
+            let resizeTimer;
+            $(window).on('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    this.handleResize();
+                }, 200);
+            });
+        }
+    };
+})(jQuery);
