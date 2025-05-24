@@ -244,6 +244,17 @@ table.dataTable tbody tr:hover {
     font-weight: bold;
 }
 
+.custom-breadcrumb .breadcrumb-separator.mobile {
+    font-weight: bold;
+    font-size: 1.25rem;
+    color: #6c757d;
+    padding-right: 8px;
+    padding-left: 0;
+    line-height: 1;
+    display: inline-block;
+    vertical-align: middle;
+}
+
 .footer {
     background-color: #e9ecef;
     font-size: 0.85em;
