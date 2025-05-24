@@ -9,17 +9,17 @@
     </head>
     <body>
         <div class="container">
-            <div class="position: relative;">
-                <h1 class="title">Stocks Analyser</h1>
-                <div class="button-container">
-                    <button id="logout" class="btn btn-custom-blue">Logout</button>
+            <div class="row padding">
+                <div class="user-auth d-flex justify-content-end align-items-center p-2">
+                    <span class="user-greeting d-none" id="user-greeting">
+                        Hello, <strong id="user-info">User</strong>!&nbsp;|&nbsp;
+                    </span>
+                    <a href="#" id="logout">Logout</a>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-12" style="text-align: right;">
-                    <span id="user-info"></span>
-                </div>
+            <div class="position: relative;">
+                <h1 class="title">Stocks Analyser</h1>
             </div>
 
             <nav aria-label="breadcrumb" class="custom-breadcrumb mt-3 mb-4">

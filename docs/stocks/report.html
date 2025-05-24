@@ -31,6 +31,15 @@
         <button id="scrollToTop" class="btn btn-custom-blue rounded-circle shadow">↑</button>
 
         <div class="container">
+            <div class="row padding">
+                <div class="user-auth d-flex justify-content-end align-items-center p-2">
+                    <span class="user-greeting d-none" id="user-greeting">
+                        Hello, <strong id="user-info">User</strong>!&nbsp;|&nbsp;
+                    </span>
+                    <a href="#" id="logout">Logout</a>
+                </div>
+            </div>
+
             <div class="position: relative;">
                 <h1 class="title">
                     <img id="logo" class="logo" />
@@ -38,15 +47,6 @@
                 </h1>
                 <div class="recommendation-box hold" id="riskProfileContainer">
                     <strong>Risk:</strong> <span id="riskProfile"></span>
-                </div>
-                <div class="button-container">
-                    <button id="logout" class="btn btn-custom-blue">Logout</button>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-12" style="text-align: right;">
-                    <span id="user-info"></span>
                 </div>
             </div>
 

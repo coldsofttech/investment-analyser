@@ -255,6 +255,24 @@ table.dataTable tbody tr:hover {
     vertical-align: middle;
 }
 
+.user-auth {
+    position: absolute;
+    top: 10px;
+    right: 75px;
+    font-size: 0.85rem;
+    z-index: 1000;
+}
+
+.user-auth a {
+    color: #6C757D;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.user-auth a:hover {
+    text-decoration: underline;
+}
+
 .footer {
     background-color: #e9ecef;
     font-size: 0.85em;
@@ -440,6 +458,12 @@ input:checked + .slider:before {
 
     .header {
         flex-direction: column;
+    }
+
+    .user-auth {
+        position: static;
+        justify-content: flex-end;
+        padding: 10px;
     }
 
     .title {
