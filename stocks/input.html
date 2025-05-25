@@ -90,9 +90,10 @@
         <script src="../static/js/currency.js"></script>
         <script>
             $(async function() {
-                $('#error-placeholder').load('../public/error.html');
+                $('#error-placeholder').load('../public/error.html', async function() {
+                    await $.Error.loadError();
+                });
                 $('#menu-placeholder').load('../public/menu.html');
-                await loadError();
 
                 await verifyAuth0Authentication();
                 await initLogoutButton();
