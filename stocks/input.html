@@ -25,6 +25,7 @@
                 <h1 class="title">Stocks Analyser</h1>
             </div>
 
+            <div id="error-placeholder"></div>
             <div id="menu-placeholder"></div>
 
             <div class="row" style="visibility: unset;">
@@ -89,11 +90,11 @@
         <script src="../static/js/currency.js"></script>
         <script>
             $(async function() {
-                loadError();
-                verifyAuth0Authentication();
-                initLogoutButton();
+                $('#error-placeholder').load('../public/error.html');
                 $('#menu-placeholder').load('../public/menu.html');
 
+                await verifyAuth0Authentication();
+                await initLogoutButton();
                 await initPage();
             });
 
