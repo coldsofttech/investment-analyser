@@ -44,7 +44,9 @@ async function getDefaultCurrency(config = {}, selectors = {}) {
     const $currencyList = $(currenciesList);
     const getCurrentCurrency = () => {
         const stored = localStorage.getItem('defaultCurrency');
-        return getCurrency(stored) || defaultCurrency();
+        return stored !== null 
+            ? getCurrency(stored)
+            : defaultCurrency();
     };
     const updateUI = (currency) => {
         _addCurrencyIcon($selector, currency.icon);
