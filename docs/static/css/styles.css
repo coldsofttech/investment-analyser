@@ -255,20 +255,15 @@ table.dataTable tbody tr:hover {
     vertical-align: middle;
 }
 
-.user-auth {
-    position: absolute;
-    top: 10px;
-    right: 75px;
-    font-size: 0.85rem;
-}
-
-.user-auth a {
+#login,
+#logout {
     color: #6C757D;
     text-decoration: none;
     font-weight: 500;
 }
 
-.user-auth a:hover {
+#login:hover,
+#logout:hover {
     text-decoration: underline;
 }
 
@@ -473,7 +468,8 @@ input:checked + .slider:before {
         flex-direction: column;
     }
 
-    .user-auth {
+    #login,
+    #logout {
         position: static;
         justify-content: flex-end;
         padding: 10px;
