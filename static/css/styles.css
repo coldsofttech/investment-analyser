@@ -260,7 +260,6 @@ table.dataTable tbody tr:hover {
     top: 10px;
     right: 75px;
     font-size: 0.85rem;
-    z-index: 1000;
 }
 
 .user-auth a {
@@ -309,6 +308,10 @@ table.dataTable tbody tr:hover {
 
 .padding { 
     padding: 10px;
+}
+
+.padding-extra {
+    padding: 35px;
 }
 
 .padding-bottom {
@@ -416,14 +419,12 @@ input:checked + .slider:before {
 }
 
 .login {
-    /* display: inline-block; */
     padding: 12px 24px;
     font-size: 1.1rem;
     color: white;
     background: linear-gradient(135deg, var(--primary), var(--primary-dark));
     border: none;
     border-radius: 8px;
-    /* text-decoration: none; */
     transition: background 0.3s ease, transform 0.2s ease;
     font-weight: bold;
 }
@@ -448,6 +449,18 @@ input:checked + .slider:before {
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.dropdown-menu {
+    background-color: #f0f4f8;
+}
+
+.dropdown-item:hover {
+    background-color: #f0f4f8;
+    text-decoration: underline;
+    text-decoration-color: var(--primary);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 3px;
 }
 
 /* Responsive */
