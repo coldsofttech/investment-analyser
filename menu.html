@@ -62,7 +62,7 @@
         <script>
             $(async function() {
                 $('#error-placeholder').load('public/error.html', async function() {
-                    await $.Error.loadError();
+                    await loadError();
                 });
                 $('#menu-placeholder').load('public/menu.html');
 
