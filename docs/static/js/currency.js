@@ -22,7 +22,7 @@
                 .removeClass((_, c) => (c.match(/\bbi\S*/g) || []).join(' '))
                 .addClass(`bi ${icon}`);
         },
-        getDefaultCurrency: function(config = {}, selectors = {}) {
+        getDefaultCurrency: async function(config = {}, selectors = {}) {
             const {
                 customCurrency = null, 
                 customSymbol = null
