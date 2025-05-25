@@ -25,19 +25,16 @@ function _addCurrencyIcon(selector, icon) {
         .addClass(`bi ${icon}`);
 }
 
-async function getDefaultCurrency(config = {}, selectors = {}) {
-    const {
-        customCurrency = null, 
-        customSymbol = null
-    } = config;
-
-    const {
+async function getDefaultCurrency(
+    customCurrency = null,
+    customSymbol = null,
+    {
         currencySelector = '#defaultCurrency',
         currencyModal = '#defaultCurrencyModal',
         currencySaveButton = '#saveDefaultCurrency',
         currenciesList = '#defaultCurrencyList'
-    } = selectors;
-
+    }
+){
     const $selector = $(currencySelector);
     const $modal = $(currencyModal);
     const $saveBtn = $(currencySaveButton);
