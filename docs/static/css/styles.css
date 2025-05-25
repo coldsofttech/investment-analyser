@@ -60,6 +60,11 @@ body {
     color: var(--text-dark);
 }
 
+input::placeholder {
+    font-style: italic;
+    color: #999999;
+}
+
 .recommendation-box {
     padding: 20px;
     font-size: 1.2em;
