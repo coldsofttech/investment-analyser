@@ -186,9 +186,10 @@
         <script src="../static/js/exchange.js"></script>
         <script>
             $(async function() {
-                $('#error-placeholder').load('../public/error.html');
+                $('#error-placeholder').load('../public/error.html', async function() {
+                    await $.Error.loadError();
+                });
                 $('#menu-placeholder').load('../public/menu.html');
-                await loadError();
 
                 await verifyAuth0Authentication();
                 await initLogoutButton();
@@ -205,11 +206,11 @@
                 const stocksOwned = parseFloat(urlParams.get('stocksOwned')) || null;
                 const avgPrice = parseFloat(urlParams.get('avgPrice')) || null;
 
-                if (!ticker) return displayError('Missing Stock Ticker.', true, errorRedirectionUrl);
+                if (!ticker) return $.Error.displayError('Missing Stock Ticker.', true, errorRedirectionUrl);
                 if (!defaultCurrency) {
                     defaultCurrency = $.Currency.getDefaultCurrency();
                 }
-                if (!defaultCurrency) return displayError('Unable to retrieve the default currency.', true, errorRedirectionUrl);
+                if (!defaultCurrency) return $.Error.displayError('Unable to retrieve the default currency.', true, errorRedirectionUrl);
                 if (!exchanges) {
                     exchanges = $.Exchange.getExchanges();
                 }
