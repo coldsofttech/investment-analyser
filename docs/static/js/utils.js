@@ -14,8 +14,8 @@
             errorContainer = '#errorMessageContainer',
             errorElementId = '#errorMessage'
         } = {}) {
-            $(errorElementId).hide().text('');
-            $(errorContainer).hide();
+            $(errorElementId).hide();
+            $(errorContainer).html();
         },
         displayError: function(message, {
             redirect = false,
