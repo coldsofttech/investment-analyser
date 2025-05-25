@@ -55,12 +55,13 @@
                 });
                 $('#menu-placeholder').load('../public/menu.html');
                 $('#userbar-placeholder').load('../public/userbar.html', async function() {
+                    $('#tickerinputform-placeholder').load('../public/stocks/tickerinputform.html', async function() {
+                        await validateTicker('#ticker');
+                    });
+
                     await getDefaultCurrency(customCurrency = '#currency', customSymbol = '#currencySymbol');
                     await verifyAuth0Authentication();
                     await initLogoutButton();
-                });
-                $('#tickerinputform-placeholder').load('../public/stocks/tickerinputform.html', async function() {
-                    await validateTicker('#ticker');
                 });
 
                 await initSubmitButton();
