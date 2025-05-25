@@ -85,7 +85,7 @@
                 });
                 $('#menu-placeholder').load('../public/menu.html');
                 $('#userbar-placeholder').load('../public/userbar.html', async function() {
-                    $.Currency.getDefaultCurrency({ customCurrency: '#currency', customSymbol: '#currencySymbol'});
+                    await $.Currency.getDefaultCurrency({ customCurrency: '#currency', customSymbol: '#currencySymbol'});
 
                     await verifyAuth0Authentication();
                     await initLogoutButton();
