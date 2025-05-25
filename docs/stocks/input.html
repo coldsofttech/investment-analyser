@@ -92,7 +92,7 @@
             $(async function() {
                 $('#error-placeholder').load('../public/error.html');
                 $('#menu-placeholder').load('../public/menu.html');
-                $.Error.loadError();
+                await loadError();
 
                 await verifyAuth0Authentication();
                 await initLogoutButton();
