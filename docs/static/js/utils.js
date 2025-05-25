@@ -7,19 +7,18 @@
             if (msg && msg !== null && msg !== undefined) {
                 return displayError(decodeURIComponent(msg));
             } else {
-                return removeError();
+                return this.removeError();
             }
+        },
+        removeError: async function({
+            errorContainer = '#errorMessageContainer',
+            errorElementId = '#errorMessage'
+        } = {}) {
+            $(errorElementId).hide();
+            $(errorContainer).html();
         }
     }
 })(jQuery);
-
-async function removeError({
-    errorContainer = '#errorMessageContainer',
-    errorElementId = '#errorMessage'
-} = {}) {
-    $(errorElementId).hide();
-    $(errorContainer).html();
-}
 
 async function displayError(message, {
     redirect = false,
