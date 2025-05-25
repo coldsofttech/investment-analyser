@@ -206,6 +206,16 @@ table.dataTable tbody tr:hover {
     box-shadow: var(--shadow-sm);
 }
 
+.form {
+    width: 100%;
+    height: auto;
+    margin: 40px 0;
+    background-color: var(--neutral-bg);
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: var(--shadow-sm);
+}
+
 .custom-breadcrumb {
     background-color: #f0f4f8;
     border-radius: 10px;
