@@ -5,9 +5,9 @@
             const msg = urlParams.get('error');
 
             if (msg && msg !== null && msg !== undefined) {
-                return $.Error.displayError(decodeURIComponent(msg));
+                this.displayError(decodeURIComponent(msg));
             } else {
-                return $.Error.removeError();
+                this.removeError();
             }
         },
         removeError: function({
