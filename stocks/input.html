@@ -9,7 +9,7 @@
         <link rel="stylesheet" type="text/css" href="../static/css/styles.css" />
     </head>
     <body>
-        <div id="loading-overlay"><div class="message">Loading...</div></div>
+        <div id="loadingoverlay-placeholder"></div>
 
         <div class="container">
             <div id="userbar-placeholder"></div>
@@ -50,6 +50,7 @@
         <script src="../static/js/validations.js"></script>
         <script>
             $(async function() {
+                $('#loadingoverlay-placeholder').load('../public/loadingoverlay.html');
                 $('#error-placeholder').load('../public/error.html', async function() {
                     await loadError();
                 });
