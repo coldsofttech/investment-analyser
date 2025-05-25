@@ -28,12 +28,6 @@
             <div id="error-placeholder"></div>
             <div id="menu-placeholder"></div>
 
-            <div class="row" style="visibility: unset;">
-                <div class="col-md-12" id="errorMessageContainer">
-                    <div class="alert alert-danger" role="alert" id="errorMessage"></div>
-                </div>
-            </div>
-
             <div class="plotly-chart" style="height: 300px;">
                 <div class="row padding">
                     <div class="col-md-8">
@@ -91,7 +85,7 @@
         <script>
             $(async function() {
                 $('#error-placeholder').load('../public/error.html', async function() {
-                    await loadError();
+                    await $.Error.loadError();
                 });
                 $('#menu-placeholder').load('../public/menu.html');
 
