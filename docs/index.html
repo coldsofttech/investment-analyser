@@ -20,11 +20,7 @@
                 <h1 class="title">Welcome to Investment Analyser</h1>
             </div>
 
-            <div class="row" style="visibility: unset;">
-                <div class="col-md-12" id="errorMessageContainer">
-                    <div class="alert alert-danger" role="alert" id="errorMessage"></div>
-                </div>
-            </div>
+            <div id="error-placeholder"></div>
 
             <div class="row justify-content-center">
                 <div class="col-md-12 padding">
@@ -55,9 +51,10 @@
         <script src="static/js/auth0.js"></script>
         <script>
             $(async function () {
-                loadError();
-                initAuth0();
-                initLoginButton();
+                $('#error-placeholder').load('public/error.html');
+
+                await initAuth0();
+                await initLoginButton();
             });
 
             async function initAuth0() {
