@@ -52,6 +52,7 @@
         <script>
             $(async function () {
                 $('#error-placeholder').load('public/error.html');
+                $.Error.loadError();
 
                 await initAuth0();
                 await initLoginButton();
