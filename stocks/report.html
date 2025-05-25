@@ -178,6 +178,8 @@
                 });
                 $('#menu-placeholder').load('../public/menu.html');
                 $('#userbar-placeholder').load('../public/userbar.html', async function() {
+                    $.Currency.getDefaultCurrency();
+                    
                     await verifyAuth0Authentication();
                     await initLogoutButton();
                 });
