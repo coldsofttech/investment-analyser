@@ -62,7 +62,7 @@ body {
 
 input::placeholder {
     font-style: italic;
-    color: #cfcfcf;
+    color: #a6a6a6 !important;
 }
 
 .recommendation-box {
