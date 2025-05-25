@@ -1,56 +1,54 @@
-(function($) {
-    $.Error = {
-        loadError: function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const msg = urlParams.get('error');
+async function loadError() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const msg = urlParams.get('error');
 
-            if (msg && msg !== null && msg !== undefined) {
-                this.displayError(decodeURIComponent(msg));
-            } else {
-                this.removeError();
-            }
-        },
-        removeError: function({
-            errorContainer = '#errorMessageContainer',
-            errorElementId = '#errorMessage'
-        } = {}) {
-            $(errorElementId).hide();
-            $(errorContainer).html();
-        },
-        displayError: function(message, {
-            redirect = false,
-            redirectUrl = '',
-            source = '',
-            errorContainer = '#errorMessageContainer',
-            errorElementId = '#errorMessage'
-        } = {}) {
-            if (redirect) {
-                const urlParams = new URLSearchParams(window.location.search);
-                urlParams.set('error', message);
+    if (msg && msg !== null && msg !== undefined) {
+        return displayError(decodeURIComponent(msg));
+    } else {
+        return removeError();
+    }
+}
 
-                const queryString = urlParams.toString();
-                if (redirectUrl) {
-                    const finalUrl = redirectUrl.includes('{source}')
-                        ? redirectUrl.replace('{source}', source)
-                        : redirectUrl;
+async function removeError({
+    errorContainer = '#errorMessageContainer',
+    errorElementId = '#errorMessage'
+} = {}) {
+    $(errorElementId).hide();
+    $(errorContainer).html();
+}
 
-                    window.location.href = `/investment-analyser/${finalUrl}?${queryString}`;
-                } else {
-                    console.warn('Redirect requested but no redirectUrl provided.');
-                }
-            } else {
-                const $error = $(errorElementId);
-                const $container = $(errorContainer);
+async function displayError(message, {
+    redirect = false,
+    redirectUrl = '',
+    source = '',
+    errorContainer = '#errorMessageContainer',
+    errorElementId = '#errorMessage'
+} = {}) {
+    if (redirect) {
+        const urlParams = new URLSearchParams(window.location.search);
+        urlParams.set('error', message);
 
-                if ($error.length) {
-                    $error.text(message).show();
-                    $container.show();
-                } else {
-                    $container.html(`
-                        <div class="alert alert-danger" role="alert" id="${errorElementId.replace('#', '')}">${message}</div>
-                    `).show();
-                }
-            }
+        const queryString = urlParams.toString();
+        if (redirectUrl) {
+            const finalUrl = redirectUrl.includes('{source}')
+                ? redirectUrl.replace('{source}', source)
+                : redirectUrl;
+
+            window.location.href = `/investment-analyser/${finalUrl}?${queryString}`;
+        } else {
+            console.warn('Redirect requested but no redirectUrl provided.');
+        }
+    } else {
+        const $error = $(errorElementId);
+        const $container = $(errorContainer);
+
+        if ($error.length) {
+            $error.text(message).show();
+            $container.show();
+        } else {
+            $container.html(`
+                <div class="alert alert-danger" role="alert" id="${errorElementId.replace('#', '')}">${message}</div>
+            `).show();
         }
     }
-})(jQuery);
+}
