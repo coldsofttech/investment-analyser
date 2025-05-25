@@ -10,13 +10,9 @@
     </head>
     <body>
         <div class="container">
-            <div class="row padding">
-                <div class="user-auth d-flex justify-content-end align-items-center p-2">
-                    <a href="#" id="login">Login</a>
-                </div>
-            </div>
+            <div id="userbar-placeholder"></div>
 
-            <div class="position: relative;">
+            <div class="position-relative">
                 <h1 class="title">Welcome to Investment Analyser</h1>
             </div>
 
@@ -54,9 +50,16 @@
                 $('#error-placeholder').load('public/error.html', async function() {
                     await loadError();
                 });
-
-                await initAuth0();
-                await initLoginButton();
+                $('#userbar-placeholder').load('public/userbar.html', async function() {
+                    $('#user-bar').empty();
+                    $('#user-bar').html(`
+                        <div class="d-flex align-items-center">
+                            <a href="#" id="login">Login</a>
+                        </div>
+                    `);
+                    await initAuth0();
+                    await initLoginButton();
+                });
             });
 
             async function initAuth0() {
