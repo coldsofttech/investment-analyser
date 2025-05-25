@@ -51,10 +51,6 @@
                 </div>
             </div>
 
-            <nav aria-label="breadcrumb" class="custom-breadcrumb mt-3 mb-4">
-                <ol class="breadcrumb" id="breadcrumb"></ol>
-            </nav>
-
             <div id="menu-placeholder"></div>
 
             <div class="row" style="visibility: unset;">
@@ -194,7 +190,6 @@
                 initLogoutButton();
 
                 $('#menu-placeholder').load('../public/menu.html');
-                await initBreadcrumb();
                 await initPage();
             });
 
@@ -217,17 +212,6 @@
                     exchanges = $.Exchange.getExchanges();
                 }
                 if (!exchanges) console.warn('Unable to retrieve the exchanges mapping.');
-            }
-
-            async function initBreadcrumb() {
-                const breadcrumbs = [
-                    { label: 'Investment Analyser', url: '/investment-analyser/menu.html' },
-                    { label: 'Stocks Analyser', url: '/investment-analyser/stocks' },
-                    { label: 'Input', url: '/investment-analyser/stocks/input.html' },
-                    { label: 'Report', url: null }
-                ];
-                $.Breadcrumb.loadBreadcrumb(breadcrumbs);
-                $.Breadcrumb.initResizeListener();
             }
         </script>
     </body>
