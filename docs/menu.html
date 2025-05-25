@@ -10,16 +10,9 @@
     </head>
     <body>
         <div class="container">
-            <div class="row padding">
-                <div class="user-auth d-flex justify-content-end align-items-center p-2">
-                    <span class="user-greeting" id="user-greeting">
-                        Hello, <strong id="user-info">User</strong>!&nbsp;|&nbsp;
-                    </span>
-                    <a href="#" id="logout">Logout</a>
-                </div>
-            </div>
+            <div id="userbar-placeholder"></div>
 
-            <div class="position-relative;">
+            <div class="position-relative">
                 <h1 class="title">Investment Analyser</h1>
             </div>
 
@@ -59,9 +52,10 @@
                     await loadError();
                 });
                 $('#menu-placeholder').load('public/menu.html');
-
-                await verifyAuth0Authentication();
-                await initLogoutButton();
+                $('#userbar-placeholder').load('public/userbar.html', async function() {
+                    await verifyAuth0Authentication();
+                    await initLogoutButton();
+                });
             });
         </script>
     </body>
