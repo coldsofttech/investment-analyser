@@ -22,12 +22,7 @@
         </style>
     </head>
     <body>
-        <div id="loading-overlay">
-            <div class="message">
-                Your awesome "Stock Analysis" report is loading. Hang tight!
-                If it takes too long, just refresh the page...
-            </div>
-        </div>
+        <div id="loadingoverlay-placeholder"></div>
 
         <button id="scrollToTop" class="btn btn-custom-blue rounded-circle shadow">↑</button>
 
@@ -157,6 +152,9 @@
         <script src="../static/js/exchange.js"></script>
         <script>
             $(async function() {
+                $('#loadingoverlay-placeholder').load('../public/loadingoverlay.html', async function() {
+                    $('#loadingOverlayMessage').text('Your awesome "Stock Analysis" report is loading. Hang tight! If it takes too long, just refresh the page...');
+                });
                 $('#error-placeholder').load('../public/error.html', async function() {
                     await loadError();
                 });
