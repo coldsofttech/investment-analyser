@@ -52,3 +52,12 @@ async function displayError(message, {
         }
     }
 }
+
+function loadHtml(selector, url) {
+    return new Promise((resolve, reject) => {
+        $(selector).load(url, function(response, status) {
+            if (status == 'error') reject(response);
+            else resolve();
+        });
+    });
+}

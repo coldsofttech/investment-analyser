@@ -51,8 +51,9 @@
         <script src="static/js/auth0.js"></script>
         <script>
             $(async function () {
-                $('#error-placeholder').load('public/error.html');
-                loadError();
+                // $('#error-placeholder').load('public/error.html');
+                await loadHtml('#error-placeholder', 'public/error.html');
+                await loadError();
 
                 await initAuth0();
                 await initLoginButton();
