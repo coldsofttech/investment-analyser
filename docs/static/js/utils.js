@@ -1,13 +1,17 @@
-async function loadError() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const msg = urlParams.get('error');
+(function($) {
+    $.Error = {
+        loadError: async function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const msg = urlParams.get('error');
 
-    if (msg && msg !== null && msg !== undefined) {
-        return displayError(decodeURIComponent(msg));
-    } else {
-        return removeError();
+            if (msg && msg !== null && msg !== undefined) {
+                return displayError(decodeURIComponent(msg));
+            } else {
+                return removeError();
+            }
+        }
     }
-}
+})(jQuery);
 
 async function removeError({
     errorContainer = '#errorMessageContainer',
@@ -51,13 +55,4 @@ async function displayError(message, {
             `).show();
         }
     }
-}
-
-function loadHtml(selector, url) {
-    return new Promise((resolve, reject) => {
-        $(selector).load(url, function(response, status) {
-            if (status == 'error') reject(response);
-            else resolve();
-        });
-    });
 }
