@@ -5,7 +5,7 @@
             const msg = urlParams.get('error');
 
             if (msg && msg !== null && msg !== undefined) {
-                return displayError(decodeURIComponent(msg));
+                return this.displayError(decodeURIComponent(msg));
             } else {
                 return this.removeError();
             }
