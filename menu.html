@@ -34,8 +34,7 @@
                 });
                 $('#menu-placeholder').load('public/menu.html');
                 $('#userbar-placeholder').load('public/userbar.html', async function() {
-                    await $.Currency.getDefaultCurrency();
-                    
+                    await getDefaultCurrency();
                     await verifyAuth0Authentication();
                     await initLogoutButton();
                 });
