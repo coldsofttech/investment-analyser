@@ -27,6 +27,8 @@
                 <ol class="breadcrumb" id="breadcrumb"></ol>
             </nav>
 
+            <div id="menu-placeholder"></div>
+
             <div class="row" style="visibility: unset;">
                 <div class="col-md-12" id="errorMessageContainer">
                     <div class="alert alert-danger" role="alert" id="errorMessage"></div>
@@ -58,6 +60,8 @@
                 verifyAuth0Authentication();
                 initLogoutButton();
                 await initBreadcrumb();
+
+                $('#menu-placeholder').load('public/menu.html');
             });
 
             async function initBreadcrumb() {
