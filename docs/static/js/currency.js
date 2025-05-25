@@ -38,7 +38,6 @@ async function getDefaultCurrency(config = {}, selectors = {}) {
         currenciesList = '#defaultCurrencyList'
     } = selectors;
 
-    const self = this;
     const $selector = $(currencySelector);
     const $modal = $(currencyModal);
     const $saveBtn = $(currencySaveButton);
@@ -54,6 +53,7 @@ async function getDefaultCurrency(config = {}, selectors = {}) {
     };
 
     const currency = getCurrentCurrency();
+    localStorage.setItem('defaultCurrency', currency.currency);
     updateUI(currency);
 
     $selector.on('click', () => {
