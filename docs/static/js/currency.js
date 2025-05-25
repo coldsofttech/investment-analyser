@@ -33,7 +33,7 @@ async function getDefaultCurrency(
         currencyModal = '#defaultCurrencyModal',
         currencySaveButton = '#saveDefaultCurrency',
         currenciesList = '#defaultCurrencyList'
-    }
+    } = {}
 ){
     const $selector = $(currencySelector);
     const $modal = $(currencyModal);
