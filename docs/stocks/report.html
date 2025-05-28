@@ -127,8 +127,7 @@
 
                 if (!ticker) return displayError('Missing Stock Ticker.', true, errorRedirectionUrl);
                 if (!defaultCurrency) {
-                    // defaultCurrency = getCurrency(localStorage.getItem('defaultCurrency'));
-                    defaultCurrency = getCurrency('GBP');
+                    defaultCurrency = getCurrency(localStorage.getItem('defaultCurrency'));
                 }
                 if (!defaultCurrency) return displayError('Unable to retrieve the default currency.', true, errorRedirectionUrl);
 
