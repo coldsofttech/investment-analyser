@@ -1,3 +1,32 @@
+async function formatCurrency(value, defaultCurrency, fullSymbol = false) {
+    const suffixes = ['', 'k', 'm', 'b', 't'];
+    let magnitude = 0;
+
+    while (Math.abs(value) >= 1000 && magnitude < suffixes.length - 1) {
+        magnitude++;
+        value /= 1000.0;
+    }
+
+    const formatted = Number(value).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+    return fullSymbol
+        ? `${formatted}${suffixes[magnitude]} ${defaultCurrency.currency}`
+        : `${defaultCurrency.symbol} ${formatted}${suffixes[magnitude]}`;
+}
+
+async function formatPercentage(value) {
+    if (isNaN(value)) return null;
+
+    return Number(value)
+        .toLocaleString('en-GB', {
+            minimumFractionDigits: 2, maximumFractionDigits: 2
+        }) + ' %';
+}
+
+async function truncWebsite(domain) {
+    return domain.replace(/^https?:\/\/(www\.)?/, '');
+}
+
 async function loadError() {
     const urlParams = new URLSearchParams(window.location.search);
     const msg = urlParams.get('error');
