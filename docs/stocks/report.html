@@ -8,23 +8,30 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
         <link rel="stylesheet" type="text/css" href="../static/css/styles.css" />
         <style>
-            #historyTable th.text-right {
-                text-align: right !important;
+            #historyTableMobileView,
+            #forecastTableMobileView,
+            #dividendsTableMobileView {
+                display: none;
             }
 
-            #forecastTable th.text-right {
-                text-align: right !important;
-            }
+            @media (max-width: 768px) {
+                #historyTableDesktopView,
+                #forecastTableDesktopView,
+                #dividendsTableDesktopView {
+                    display: none;
+                }
 
-            #dividendsTable th.text-right {
-                text-align: right !important;
+                #historyTableMobileView,
+                #forecastTableMobileView,
+                #dividendsTableMobileView {
+                    display: block;
+                }
             }
         </style>
     </head>
     <body>
         <div id="loadingoverlay-placeholder"></div>
-
-        <button id="scrollToTop" class="btn btn-custom-blue rounded-circle shadow">↑</button>
+        <div id="scrolltotop-placeholder"></div>
 
         <div class="container">
             <div id="userbar-placeholder"></div>
@@ -34,108 +41,18 @@
                     <img id="logo" class="logo" />
                     <span id="companyName"></span>
                 </h1>
-                <div class="recommendation-box hold" id="riskProfileContainer">
-                    <strong>Risk:</strong> <span id="riskProfile"></span>
-                </div>
+                <div id="riskprofileinfo-placeholder"></div>
             </div>
 
             <div id="error-placeholder"></div>
             <div id="menu-placeholder"></div>
-
-            <div class="row custom-breadcrumb padding" id="investmentContainer">
-                <div class="col-md-4 investment-row">
-                    <strong>Net Deposit:</strong> <span id="investmentNet" style="font-weight: bold;"></span>
-                </div>
-                <div class="col-md-4 investment-row">
-                    <strong>Current Value:</strong> <span id="investmentCurrent" style="font-weight: bold;"></span>
-                </div>
-                <div class="col-md-4 investment-row">
-                    <strong>Rate of Return %:</strong> <span id="investmentGrowth" style="font-weight: bold;"></span>
-                </div>
-            </div>
-
-            <div class="row" style="padding-bottom: 10px; padding-top: 10px; display: flex; align-items: stretch;">
-                <div class="col-md-6 d-flex">
-                    <div class="recommendation-box hold" id="shortTermRecommendationContainer" style="flex: 1;">
-                        <strong>Short-Term:</strong> <span id="shortTermRecommendation"></span>
-                    </div>
-                </div>
-                <div class="col-md-6 d-flex">
-                    <div class="recommendation-box hold" id="longTermRecommendationContainer" style="flex: 1;">
-                        <strong>Long-Term:</strong> <span id="longTermRecommendation"></span>
-                    </div>
-                </div>
-            </div>
-
-            <h2 class="title">Company Information</h2>
-            <div class="row">
-                <div class="col-md-6">
-                    <ul class="details-list">
-                        <li><strong>Exchange:</strong> <span id="exchange"></span></li>
-                        <li><strong>Industry:</strong> <span id="industry"></span></li>
-                        <li><strong>Sector:</strong> <span id="sector"></span></li>
-                        <li><strong>Website:</strong> <a target="_blank" id="website"></a></li>
-                        <li><strong>Stocks Owned:</strong> <span id="stocksOwned"></span></li>
-                        <li><strong>Avg. Price:</strong> <span id="avgPrice"></span></li>
-                    </ul>
-                </div>
-                <div class="col-md-6">
-                    <ul class="details-list">
-                        <li><strong>Market Cap:</strong> <span id="marketCap"></span></li>
-                        <li><strong>Dividend Yield:</strong> <span id="dividendYield"></span></li>
-                        <li><strong>Dividend Payout Ratio:</strong> <span id="dividendPayoutRatio"></span></li>
-                        <li><strong>Dividend Frequency:</strong> <span id="dividendFrequency"></span></li>
-                        <li><strong>Volatility:</strong> <span id="volatility"></span></li>
-                        <li><strong>Beta:</strong> <span id="beta"></span></li>
-                    </ul>
-                </div>
-            </div>
-
-            <h2 class="title">Historical Performance</h2>
-            <table id="historyTable" class="display dataTable">
-                <thead>
-                    <tr>
-                        <th>Index</th>
-                        <th>Period</th>
-                        <th class="text-right">Growth %</th>
-                        <th class="text-right">CAGR %</th>
-                        <th class="text-right">Dividend CAGR %</th>
-                        <th class="text-right">Total Return CAGR %</th>
-                    </tr>
-                </thead>
-            </table>
-
-            <div class="plotly-chart">
-                <div id="stockInfoChart" style="display: flex; justify-content: center; align-items: center; height: 100%; text-align: center;"></div>
-            </div>
-
-            <h2 class="title">Future Performance</h2>
-            <table id="forecastTable" class="display dataTable">
-                <thead>
-                    <tr>
-                        <th>Index</th>
-                        <th>Period</th>
-                        <th class="text-right">Forecast Price</th>
-                        <th class="text-right">Growth %</th>
-                        <th class="text-right">CAGR %</th>
-                        <th class="text-right">Dividend CAGR %</th>
-                        <th class="text-right">Total Returns CAGR %</th>
-                        <th class="text-right">Price Return %</th>
-                        <th class="text-right">Total Returns</th>
-                    </tr>
-                </thead>
-            </table>
-
-            <h2 class="title">Dividends</h2>
-            <table id="dividendsTable" class="display dataTable">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th class="text-right">Amount <i>(per share)</i></th>
-                        <th class="text-right">Earnings</th>
-                    </tr>
-                </thead>
-            </table>
+            <div id="investmentinfo-placeholder"></div>
+            <div id="recommendationsinfo-placeholder"></div>
+            <div id="companyinfo-placeholder"></div>
+            <div id="historicalperformanceinfo-placeholder"></div>
+            <div id="historicallinechart-placeholder"></div>
+            <div id="futureperformanceinfo-placeholder"></div>
+            <div id="dividendsinfo-placeholder"></div>
         </div>
 
         <div id="keyterminology-placeholder"></div>
@@ -150,6 +67,10 @@
         <script src="../static/js/auth0.js"></script>
         <script src="../static/js/currency.js"></script>
         <script src="../static/js/exchange.js"></script>
+        <script src="../static/js/renders.js"></script>
+        <script src="../static/js/stocks/ticker.js"></script>
+        <script src="../static/js/stocks/fxrate.js"></script>
+        <script src="../static/js/stocks/analyser.js"></script>
         <script>
             $(async function() {
                 $('#loadingoverlay-placeholder').load('../public/loadingoverlay.html', async function() {
@@ -165,30 +86,359 @@
                     await initLogoutButton();
                 });
                 $('#keyterminology-placeholder').load('../public/stocks/keyterminology.html');
+                $('#companyinfo-placeholder').load('../public/stocks/companyinfo.html');
+                $('#investmentinfo-placeholder').load('../public/stocks/investmentinfo.html');
+                $('#historicalperformanceinfo-placeholder').load('../public/stocks/historicalperformanceinfo.html');
+                $('#futureperformanceinfo-placeholder').load('../public/stocks/futureperformanceinfo.html');
+                $('#dividendsinfo-placeholder').load('../public/stocks/dividendsinfo.html');
+                $('#recommendationsinfo-placeholder').load('../public/stocks/recommendationsinfo.html');
+                $('#riskprofileinfo-placeholder').load('../public/stocks/riskprofileinfo.html');
+                $('#historicallinechart-placeholder').load('../public/stocks/historicallinechart.html');
+                $('#scrolltotop-placeholder').load('../public/scrolltotop.html', async function() {
+                    const $scrollToTop = $('#scrollToTop');
+                    $(window).scroll(function() {
+                        if ($(this).scrollTop() > 100) {
+                            $scrollToTop.fadeIn();
+                        } else {
+                            $scrollToTop.fadeOut();
+                        }
+                    });
+
+                    $scrollToTop.click(function() {
+                        $('html, body').animate({ scrollTop: 0 }, 'slow');
+                        return false;
+                    });
+                });
                 
-                await initPage();
+                setTimeout(async () => { await initPage(); }, 0);
             });
 
             async function initPage() {
-                let defaultCurrency, exchanges, stockData, fxRate, fxRateKey, stockObject;
-
                 const $loadingOverlay = $('#loading-overlay');
+
+                $loadingOverlay.show();
                 const urlParams = new URLSearchParams(window.location.search);
                 const errorRedirectionUrl = `/investment-analyser/stocks/input.html?${decodeURIComponent(urlParams.toString())}`;
                 const ticker = urlParams.get('ticker');
                 const stocksOwned = parseFloat(urlParams.get('stocksOwned')) || null;
                 const avgPrice = parseFloat(urlParams.get('avgPrice')) || null;
 
-                if (!ticker) return $.Error.displayError('Missing Stock Ticker.', true, errorRedirectionUrl);
+                let defaultCurrency;
+
+                if (!ticker) return displayError('Missing Stock Ticker.', true, errorRedirectionUrl);
                 if (!defaultCurrency) {
-                    defaultCurrency = $.Currency.getDefaultCurrency();
+                    // defaultCurrency = getCurrency(localStorage.getItem('defaultCurrency'));
+                    defaultCurrency = getCurrency('GBP');
                 }
-                if (!defaultCurrency) return $.Error.displayError('Unable to retrieve the default currency.', true, errorRedirectionUrl);
-                if (!exchanges) {
-                    exchanges = $.Exchange.getExchanges();
-                }
-                if (!exchanges) console.warn('Unable to retrieve the exchanges mapping.');
+                if (!defaultCurrency) return displayError('Unable to retrieve the default currency.', true, errorRedirectionUrl);
+
+                const tickerObject = new Ticker(ticker, stocksOwned, avgPrice);
+                await tickerObject.init();
+                if (!tickerObject.data) return displayError(`Unable to retrieve the stocks information for ${ticker}.`, true, errorRedirectionUrl);
+
+                const fxRateObject = new FXRate(tickerObject.data.info.currency, defaultCurrency.currency);
+                await fxRateObject.init();
+                if (!fxRateObject.data) return displayError(`Unable to retrieve the FX information for ${tickerObject.data.info.currency} <> ${defaultCurrency.currency}.`, true, errorRedirectionUrl);
+
+                const stockAnalyser = new StockAnalyser(tickerObject, fxRateObject);
+                await loadFXRateDetails(stockAnalyser);
+                await loadCompanyDetails(stockAnalyser, defaultCurrency);
+                await loadInvestmentInfo(stockAnalyser, defaultCurrency);
+                await loadHistoricalPerformance(stockAnalyser.historicalPerformance);
+                await loadFutureForecast(stockAnalyser.futureForecast, avgPrice, defaultCurrency);
+                await loadDividends(stockAnalyser.data, defaultCurrency);
+                await loadRecommendations(stockAnalyser.recommendations)
+                await loadRiskProfile(stockAnalyser.riskProfile);
+                await loadChart(stockAnalyser.data, avgPrice, defaultCurrency);
+
+                $loadingOverlay.hide();
             }
-        </script>
+
+            async function loadFXRateDetails(analyser) {
+                $('#conversionRateFooter').html(`
+                    <strong>Note:</strong> All values are displayed in <strong>${analyser.data?.fxRate?.to}</strong> 
+                    instead of the actual stock currency <strong>${analyser.data?.fxRate?.from}</strong> 
+                    (Conversion Rate: <strong>~${parseFloat(analyser.data?.fxRate?.conversionRate).toFixed(4)}</strong>).
+                `);
+            }
+
+            async function loadCompanyDetails(analyser, defaultCurrency) {
+                const $stocksOwnedContainer = $('#stocksOwnedContainer');
+                const $avgPriceContainer = $('#avgPriceContainer');
+                const info = analyser.data?.info;
+                const setText = (id, text) => $(`#${id}`).text(text);
+                const setAttr = (id, attr, value) => $(`#${id}`).attr(attr, value);
+                const formatOrNA = (val, formatFn) => val !== null && val !== undefined ? formatFn(val) : 'N/A';
+                const setVisible = ($selector, isVisible, showClass = 'd-flex', hideClass = 'd-none') => {
+                    $selector.toggleClass(hideClass, !isVisible).toggleClass(showClass, isVisible);
+                }
+
+                setAttr('logo', 'src', await renderLogo(await truncWebsite(info?.website)));
+                setText('companyName', `${info?.companyName} (${analyser.data?.tickerCode})`);
+                setAttr('companyName', 'title', info?.companyDescription);
+                setText('exchange', info?.exchange);
+                setText('industry', info?.industry);
+                setText('sector', info?.sector);
+                setText('website', await truncWebsite(info?.website));
+                setAttr('website', 'href', info?.website);
+                setAttr('website', 'aria-label', `Visit ${info?.companyName} website.`);
+                setText('type', info?.type);
+                setText('marketCap', await formatCurrency(info?.marketCap * analyser.data?.fxRate?.conversionRate, defaultCurrency, true));
+                setText('dividendYield', await formatOrNA(info?.dividendYield, formatPercentage));
+                setText('dividendPayoutRatio', await formatOrNA(info?.payoutRatio, formatPercentage));
+                setText('dividendFrequency', info?.dividendFrequency ?? 'N/A');
+                setText('volatility', await formatOrNA(info?.volatility, formatPercentage));
+                setText('beta', info?.beta?.toFixed(2));
+                setText('currentPrice', await formatCurrency(analyser.data?.priceInfo?.currentPrice * analyser.data?.fxRate?.conversionRate, defaultCurrency, true));
+
+                if (analyser.data?.localInfo?.stocksOwned > 0) {
+                    setVisible($stocksOwnedContainer, true);
+                    setVisible($avgPriceContainer, true);
+                    setText('stocksOwned', analyser.data?.localInfo?.stocksOwned);
+                    setText('avgPrice', await formatCurrency(analyser.data?.localInfo?.avgPrice, defaultCurrency, true));
+                } else {
+                    setVisible($stocksOwnedContainer, false);
+                    setVisible($avgPriceContainer, false);
+                }
+            }
+            
+            async function loadInvestmentInfo(analyser, defaultCurrency) {
+                const $investmentContainer = $('#investmentContainer');
+                const stocksOwned = analyser.data?.localInfo?.stocksOwned;
+                const avgPrice = analyser.data?.localInfo?.avgPrice;
+                const currentPrice = analyser.data?.priceInfo?.currentPrice * analyser.data?.fxRate?.conversionRate;
+
+                if (stocksOwned > 0) {
+                    const netValue = stocksOwned * avgPrice;
+                    const currentValue = stocksOwned * currentPrice;
+                    const growth = ((currentPrice - avgPrice) / avgPrice) * 100;
+                    const netContent = `
+                        <div class="text-right">
+                            ${await formatCurrency(netValue, defaultCurrency)}<br>
+                            <i class="optional-text">(${stocksOwned} * ${await formatCurrency(avgPrice, defaultCurrency)})</i>
+                        </div>
+                    `;
+                    const currentContent = `
+                        <div class="text-right">
+                            ${await formatCurrency(currentValue, defaultCurrency)}<br>
+                            <i class="optional-text">(${stocksOwned} * ${await formatCurrency(currentPrice, defaultCurrency)})</i>
+                        </div>
+                    `;
+                    const growthContent = `
+                        <div class="text-right">
+                            ${await formatPercentage(growth)}<br>
+                            <i class="optional-text">(${growth > 0 ? "Profit" : "Loss"}: ${await formatCurrency(currentValue - netValue, defaultCurrency)})</i>
+                        </div>
+                    `;
+
+                    $('#investmentNet').html(netContent).attr('class', 'color-na');
+                    $('#investmentCurrent').html(currentContent).attr('class', currentValue > netValue ? 'color-pos' : 'color-neg');
+                    $('#investmentGrowth').html(growthContent).attr('class', growth > 0 ? 'color-pos' : 'color-neg');
+                    $investmentContainer.show();
+                } else {
+                    $investmentContainer.hide();
+                }
+            }
+        
+            async function loadHistoricalPerformance(data) {
+                const processedData = await Promise.all(data.map(async (row) => {
+                    const format = async (val) => val === null ? 'N/A' : await formatPercentage(val);
+                    const colorClass = (val) => isNaN(val) || val === null ? 'color-na' : val >= 0 ? 'color-pos' : 'color-neg';
+
+                    return {
+                        ...row,
+                        growthFormatted: `<span class="${colorClass(row.growth)}">${await format(row.growth)}</span>`,
+                        cagrFormatted: `<span class="${colorClass(row.cagr)}">${await format(row.cagr)}</span>`,
+                        dividendCagrFormatted: `<span class="${colorClass(row.dividendCagr)}">${await format(row.dividendCagr)}</span>`,
+                        totalReturnsCagrFormatted: `<span class="${colorClass(row.totalReturnsCagr)}">${await format(row.totalReturnsCagr)}</span>`,
+                    };
+                }));
+
+                const columns = [
+                    { data: 'index', title: 'Index' },
+                    { data: 'period', title: 'Period' },
+                    { data: 'growthFormatted', title: 'Growth %' },
+                    { data: 'cagrFormatted', title: 'CAGR %' },
+                    { data: 'dividendCagrFormatted', title: 'Dividend CAGR %' },
+                    { data: 'totalReturnsCagrFormatted', title: 'Total Returns CAGR %' }
+                ];
+
+                await renderDataTable({
+                    selector: $('#historyTable'),
+                    data: processedData,
+                    columns: columns,
+                    rightAlignColumns: [2, 3, 4, 5],
+                    hiddenColumns: [0]
+                });
+
+                await renderDataTableMobileView({
+                    elementId: '#historyTableMobileView',
+                    data: processedData,
+                    columns: columns,
+                    titleFields: ['period', 'totalReturnsCagrFormatted'],
+                    hiddenFields: ['index']
+                });
+            }
+        
+            async function loadFutureForecast(data, avgPrice, defaultCurrency) {
+                const processedData = await Promise.all(data.map(async (row) => {
+                    const formatC = async (val) => val === null ? 'N/A' : await formatCurrency(val, defaultCurrency);
+                    const formatP = async (val) => val === null ? 'N/A' : await formatPercentage(val);
+                    const colorClass = (val, threshold) => isNaN(val) || val === null ? 'color-na' : val >= threshold ? 'color-pos' : 'color-neg';
+
+                    return {
+                        ...row,
+                        forecastPriceFormatted: `<span class="${colorClass(row.forecastPrice, avgPrice)}">${await formatC(row.forecastPrice)}</span>`,
+                        growthFormatted: `<span class="${colorClass(row.growth, 0)}">${await formatP(row.growth)}</span>`,
+                        cagrFormatted: `<span class="${colorClass(row.cagr, 0)}">${await formatP(row.cagr)}</span>`,
+                        dividendCagrFormatted: `<span class="${colorClass(row.dividendCagr, 0)}">${await formatP(row.dividendCagr)}</span>`,
+                        totalReturnsCagrFormatted: `<span class="${colorClass(row.totalReturnsCagr, 0)}">${await formatP(row.totalReturnsCagr)}</span>`,
+                        priceReturnGrowthFormatted: `<span class="${colorClass(row.priceReturnGrowth, 0)}">${await formatP(row.priceReturnGrowth)}</span>`,
+                        totalReturnsFormatted: `<span class="${colorClass(row.totalReturns, 0)}">${await formatC(row.totalReturns, defaultCurrency)}</span>`
+                    };
+                }));
+
+                const columns = [
+                    { data: 'index', title: 'Index' },
+                    { data: 'period', title: 'Period' },
+                    { data: 'forecastPriceFormatted', title: 'Forecast Price' },
+                    { data: 'growthFormatted', title: 'Growth %' },
+                    { data: 'cagrFormatted', title: 'CAGR %' },
+                    { data: 'dividendCagrFormatted', title: 'Dividend CAGR %' },
+                    { data: 'totalReturnsCagrFormatted', title: 'Total Returns CAGR %' },
+                    { data: 'priceReturnGrowthFormatted', title: 'Price Return %' },
+                    { data: 'totalReturnsFormatted', title: 'Total Returns' }
+                ];
+
+                await renderDataTable({
+                    selector: $('#forecastTable'),
+                    data: processedData,
+                    columns: columns,
+                    rightAlignColumns: [2, 3, 4, 5, 6, 7, 8],
+                    hiddenColumns: avgPrice > 0 ? [0] : [0, 7, 8]
+                });
+
+                await renderDataTableMobileView({
+                    elementId: '#forecastTableMobileView',
+                    data: processedData,
+                    columns: columns,
+                    titleFields: ['period', 'totalReturnsCagrFormatted'],
+                    hiddenFields: avgPrice > 0 ? ['index'] : ['index', 'priceReturnGrowthFormatted', 'totalReturnsFormatted']
+                });
+            }
+        
+            async function loadDividends(data, defaultCurrency) {
+                const dividends = [];
+                const addDividend = (date, price) => {
+                    const convertedPrice = price * data.fxRate?.conversionRate;
+                    dividends.push({
+                        date,
+                        price: convertedPrice,
+                        earning: data.localInfo?.stocksOwned > 0 ? data.localInfo?.stocksOwned * convertedPrice : 0
+                    });
+                }
+                const upcoming = data.events?.dividends;
+                if (upcoming?.date) addDividend(upcoming.date, upcoming.price);
+                if (data.dividends?.length > 0) {
+                    const lastFour = data.dividends?.slice(-4);
+                    lastFour.forEach((item, i) => addDividend(item.date, item.price));
+                }
+                const processedData = await Promise.all(dividends.map(async (row) => {
+                    const format = async (val) => val === null ? 'N/A' : await formatCurrency(val, defaultCurrency);
+
+                    return {
+                        ...row,
+                        priceFormatted: await format(row.price),
+                        earningFormatted: await format(row.earning)
+                    };
+                }));
+
+                const columns = [
+                    { data: 'date', title: 'Date' },
+                    { data: 'priceFormatted', title: 'Amount <i>(per share)</i>' },
+                    { data: 'earningFormatted', title: 'Earnings' }
+                ];
+
+                await renderDataTable({
+                    selector: $('#dividendsTable'),
+                    data: processedData,
+                    columns: columns,
+                    rightAlignColumns: [1, 2],
+                    hiddenColumns: data.localInfo?.stocksOwned > 0 ? [] : [2],
+                    additionalOptions: {
+                        order: [[0, 'desc']],
+                        createdRow: function(row, rowData) {
+                            const today = new Date().setHours(0, 0, 0, 0);
+                            const rowDate = new Date(rowData.date).setHours(0, 0, 0, 0);
+                            if (rowDate > today) $(row).css('font-weight', 'bold');
+                        }
+                    }
+                });
+
+                await renderDataTableMobileView({
+                    elementId: '#dividendsTableMobileView',
+                    data: processedData.sort(
+                        (a, b) => new Date(b.date) - new Date(a.date)
+                    ),
+                    columns: columns,
+                    titleFields: data.localInfo?.stocksOwned > 0
+                        ? ['date', 'earningFormatted']
+                        : ['date'],
+                    hiddenFields: data.localInfo?.stocksOwned > 0
+                        ? []
+                        : ['earningFormatted']
+                });
+            }
+        
+            async function loadRecommendations(data) {
+                const shortTerm = data?.shortTerm;
+                const longTerm = data?.longTerm;
+
+                $('#shortTermRecommendation').text(`${shortTerm?.comments}. Average CAGR: ${await formatPercentage(shortTerm?.cagr)}.`);
+                $('#shortTermRecommendationContainer').attr('class', `recommendation-box ${riskProfileClasses[shortTerm?.risk]}`);
+                $('#longTermRecommendation').text(`${longTerm?.comments}. Average CAGR: ${await formatPercentage(longTerm?.cagr)}.`);
+                $('#longTermRecommendationContainer').attr('class', `recommendation-box ${riskProfileClasses[longTerm?.risk]}`);
+            }
+       
+            async function loadRiskProfile(data) {
+                const tooltipContent = `
+                    <span class="custom-tooltip recommendation-box ${riskProfileClasses[data?.overallRisk]}">
+                        <strong>Beta</strong>: ${data?.riskProfile.beta.risk}<br>
+                        <strong>Market Cap</strong>: ${data?.riskProfile.marketCap.risk}<br>
+                        <strong>Max Drawdown</strong>: ${data?.riskProfile.maxDrawdown.risk}<br>
+                        <strong>Sharpe Ratio</strong>: ${data?.riskProfile.sharpeRatio.risk}<br>
+                        <strong>Volatility</strong>: ${data?.riskProfile.volatility.risk}
+                    </span>
+                `;
+                $('#riskProfile').html(`${data?.overallRisk}${tooltipContent}`);
+                $('#riskProfileContainer').attr('class', `recommendation-box ${riskProfileClasses[data?.overallRisk]}`);
+            }
+       
+            async function loadChart(data, avgPrice, defaultCurrency) {
+                const dates = data.data.map(item => item.date);
+                const prices = data.data.map(item => item.price * data.fxRate?.conversionRate);
+                const chartData = {
+                    series: [{
+                        dates: dates,
+                        values: prices,
+                        label: `Price (in ${defaultCurrency.currency})`,
+                        fxRate: data.fxRate?.conversionRate,
+                        color: '#3498DB'
+                    }]
+                };
+
+                if (avgPrice > 0) {
+                    chartData.avgLine = { value: parseFloat(avgPrice) }
+                }
+
+                await renderLineChart({
+                    chartId: 'stockInfoChart',
+                    chartTitle: 'Historical Data',
+                    data: chartData,
+                    currency: defaultCurrency.currency,
+                    showLegend: false
+                });
+            }
+       </script>
     </body>
 </html>
