@@ -46,27 +46,6 @@
 
             <div id="error-placeholder"></div>
             <div id="menu-placeholder"></div>
-            <nav class="navbar navbar-expand-lg navbar-light custom-breadcrumb mt-3 mb-4">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="/investment-analyser/menu.html">Menu</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse navbar-mobile" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Stocks Analyser</a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" href="/investment-analyser/stocks/input.html"><i class="bi bi-graph-up"></i><span class="padding">Stocks</span></a></li>
-                        <li><a class="dropdown-item" href="/investment-analyser/stocks/pie"><i class="bi bi-pie-chart"></i><span class="padding">Pie <i>(Portfolios)</i></span></a></li>
-                        <li><a class="dropdown-item" href="#"><span class="padding-extra">New Pie</span></a></li>
-                        <li><a class="dropdown-item" href="#"><span class="padding-extra">Load Pie</span></a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
             <div id="investmentinfo-placeholder"></div>
             <div id="recommendationsinfo-placeholder"></div>
             <div id="companyinfo-placeholder"></div>
@@ -94,42 +73,42 @@
         <script src="../static/js/stocks/analyser.js"></script>
         <script>
             $(async function() {
-                // $('#loadingoverlay-placeholder').load('../public/loadingoverlay.html', async function() {
-                //     $('#loadingOverlayMessage').text('Your awesome "Stock Analysis" report is loading. Hang tight! If it takes too long, just refresh the page...');
-                // });
-                // $('#error-placeholder').load('../public/error.html', async function() {
-                //     await loadError();
-                // });
-                // $('#menu-placeholder').load('../public/menu.html');
-                // $('#userbar-placeholder').load('../public/userbar.html', async function() {
-                //     await getDefaultCurrency();
-                //     await verifyAuth0Authentication();
-                //     await initLogoutButton();
-                // });
-                // $('#keyterminology-placeholder').load('../public/stocks/keyterminology.html');
-                // $('#companyinfo-placeholder').load('../public/stocks/companyinfo.html');
-                // $('#investmentinfo-placeholder').load('../public/stocks/investmentinfo.html');
-                // $('#historicalperformanceinfo-placeholder').load('../public/stocks/historicalperformanceinfo.html');
-                // $('#futureperformanceinfo-placeholder').load('../public/stocks/futureperformanceinfo.html');
-                // $('#dividendsinfo-placeholder').load('../public/stocks/dividendsinfo.html');
-                // $('#recommendationsinfo-placeholder').load('../public/stocks/recommendationsinfo.html');
-                // $('#riskprofileinfo-placeholder').load('../public/stocks/riskprofileinfo.html');
-                // $('#historicallinechart-placeholder').load('../public/stocks/historicallinechart.html');
-                // $('#scrolltotop-placeholder').load('../public/scrolltotop.html', async function() {
-                //     const $scrollToTop = $('#scrollToTop');
-                //     $(window).scroll(function() {
-                //         if ($(this).scrollTop() > 100) {
-                //             $scrollToTop.fadeIn();
-                //         } else {
-                //             $scrollToTop.fadeOut();
-                //         }
-                //     });
+                $('#loadingoverlay-placeholder').load('../public/loadingoverlay.html', async function() {
+                    $('#loadingOverlayMessage').text('Your awesome "Stock Analysis" report is loading. Hang tight! If it takes too long, just refresh the page...');
+                });
+                $('#error-placeholder').load('../public/error.html', async function() {
+                    await loadError();
+                });
+                $('#menu-placeholder').load('../public/menu.html');
+                $('#userbar-placeholder').load('../public/userbar.html', async function() {
+                    await getDefaultCurrency();
+                    await verifyAuth0Authentication();
+                    await initLogoutButton();
+                });
+                $('#keyterminology-placeholder').load('../public/stocks/keyterminology.html');
+                $('#companyinfo-placeholder').load('../public/stocks/companyinfo.html');
+                $('#investmentinfo-placeholder').load('../public/stocks/investmentinfo.html');
+                $('#historicalperformanceinfo-placeholder').load('../public/stocks/historicalperformanceinfo.html');
+                $('#futureperformanceinfo-placeholder').load('../public/stocks/futureperformanceinfo.html');
+                $('#dividendsinfo-placeholder').load('../public/stocks/dividendsinfo.html');
+                $('#recommendationsinfo-placeholder').load('../public/stocks/recommendationsinfo.html');
+                $('#riskprofileinfo-placeholder').load('../public/stocks/riskprofileinfo.html');
+                $('#historicallinechart-placeholder').load('../public/stocks/historicallinechart.html');
+                $('#scrolltotop-placeholder').load('../public/scrolltotop.html', async function() {
+                    const $scrollToTop = $('#scrollToTop');
+                    $(window).scroll(function() {
+                        if ($(this).scrollTop() > 100) {
+                            $scrollToTop.fadeIn();
+                        } else {
+                            $scrollToTop.fadeOut();
+                        }
+                    });
 
-                //     $scrollToTop.click(function() {
-                //         $('html, body').animate({ scrollTop: 0 }, 'slow');
-                //         return false;
-                //     });
-                // });
+                    $scrollToTop.click(function() {
+                        $('html, body').animate({ scrollTop: 0 }, 'slow');
+                        return false;
+                    });
+                });
                 
                 setTimeout(async () => { await initPage(); }, 0);
             });
