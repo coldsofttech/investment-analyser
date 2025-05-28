@@ -44,12 +44,6 @@ body {
     width: auto;
 }
 
-.navbar,
-.navbar * {
-    z-index: auto !important;
-    position: static !important;
-}
-
 #loading-overlay {
     position: fixed; 
     top: 0; 
@@ -463,10 +457,12 @@ input:checked + .slider:before {
     line-height: 45px;
     text-align: center;
     background-color: #2980b9;
+    color: #fff;
 }
 
 #scrollToTop:hover {
     background-color: #3498db;
+    color: #fff;
 }
 
 .login {
