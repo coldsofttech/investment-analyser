@@ -49,7 +49,7 @@
     document.addEventListener('userBarReady', async function() {
         const pathName = window.location.pathname;
         const appRootPath = '/investment-analyser/';
-        const isIndexPage = (pathname === appRootPath || pathname === `${appRootPath}index.html`);
+        const isIndexPage = (pathName === appRootPath || pathName === `${appRootPath}index.html`);
 
         const $loginContainer = $('#userBarLoginContainer');
         const $userContainer = $('#userInfo');
