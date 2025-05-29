@@ -67,11 +67,11 @@ const verifyAuth0Authentication = async() => {
     await configureAuth0Client();
     await handleAuth0RedirectCallback();
     await requireAuth();
-    const isAuthenticated = await isAuth0Authenticated();
-    if (isAuthenticated) {
-        const user = await getAuth0UserInfo();
-        $('#user-info').text(user.name);
-    }
+    // const isAuthenticated = await isAuth0Authenticated();
+    // if (isAuthenticated) {
+    //     const user = await getAuth0UserInfo();
+    //     $('#user-info').text(user.name);
+    // }
 }
 
 async function initLoginButton() {

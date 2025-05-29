@@ -32,21 +32,9 @@
                     await loadError();
                 });
                 $('#userbar-placeholder').load('public/userbar.html', async function() {
-                    $('#user-bar').empty();
-                    $('#user-bar').html(`
-                        <div class="d-flex align-items-center">
-                            <a href="#" id="login">Login</a>
-                        </div>
-                    `);
-                    await initAuth0();
-                    await initLoginButton();
+                    document.dispatchEvent(new Event('userBarReady'));
                 });
             });
-
-            async function initAuth0() {
-                await configureAuth0Client();
-                updateAuth0UI();
-            }
         </script>
     </body>
 </html>
