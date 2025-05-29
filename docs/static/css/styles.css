@@ -302,9 +302,9 @@ table.dataTable tbody tr:hover {
 
 #login,
 #logout {
-    color: #6C757D;
+    /* color: #6C757D;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 500; */
 }
 
 #login:hover,
@@ -522,9 +522,9 @@ input:checked + .slider:before {
 
     #login,
     #logout {
-        position: static;
+        /* position: static;
         justify-content: flex-end;
-        padding: 10px;
+        padding: 10px; */
     }
 
     .title {
