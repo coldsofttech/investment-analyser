@@ -154,11 +154,13 @@
             }
 
             async function loadFXRateDetails(analyser) {
-                $('#conversionRateFooter').html(`
-                    <strong>Note:</strong> All values are displayed in <strong>${analyser.data?.fxRate?.to}</strong> 
-                    instead of the actual stock currency <strong>${analyser.data?.fxRate?.from}</strong> 
-                    (Conversion Rate: <strong>~${parseFloat(analyser.data?.fxRate?.conversionRate).toFixed(4)}</strong>).
-                `);
+                if (analyser.data?.fxRate?.from !== analyser.data?.fxRate?.to) {
+                    $('#conversionRateFooter').html(`
+                        <strong>Note:</strong> All values are displayed in <strong>${analyser.data?.fxRate?.to}</strong> 
+                        instead of the actual stock currency <strong>${analyser.data?.fxRate?.from}</strong> 
+                        (Conversion Rate: <strong>~${parseFloat(analyser.data?.fxRate?.conversionRate).toFixed(4)}</strong>).
+                    `);
+                }
             }
 
             async function loadCompanyDetails(analyser, defaultCurrency) {
