@@ -47,25 +47,32 @@
 
 <script>
     document.addEventListener('userBarReady', async function() {
-        await verifyAuth0Authentication();
+        const pathName = window.location.pathname;
+        const appRootPath = '/investment-analyser/';
+        const isIndexPage = (pathname === appRootPath || pathname === `${appRootPath}index.html`);
 
-        const isAuthenticated = await isAuth0Authenticated();
         const $loginContainer = $('#userBarLoginContainer');
         const $userContainer = $('#userInfo');
         const $dropdownContainer = $('#userBarDropDownContainer');
 
-        if (isAuthenticated) {
-            const user = await getAuth0UserInfo();
-            $userContainer.text(user.name);
-            $dropdownContainer.show();
-            $loginContainer.hide();
-
-            await initLogoutButton();
-        } else {
+        if (isIndexPage) {
             $dropdownContainer.hide();
             $loginContainer.show();
 
+            await configureAuth0Client();
+            updateAuth0UI();
             await initLoginButton();
+        } else {
+            await verifyAuth0Authentication();
+            await initLogoutButton();
+
+            const isAuthenticated = await isAuth0Authenticated();
+            if (isAuthenticated) {
+                const user = await getAuth0UserInfo();
+                $userContainer.text(user.name);
+                $dropdownContainer.show();
+                $loginContainer.hide();
+            }
         }
     });
 </script>
